@@ -7,7 +7,7 @@ class PrimitiveGroup {
   Primitive[] primitives = new Primitive[30];
 
   PrimitiveGroup() {
-    populate();
+    test_populate();
   }
 
   void update() {
@@ -24,7 +24,10 @@ class PrimitiveGroup {
     }
   }
 
-  void populate() {
+//  void populate(ArrayList<primitive> primitives_ext) {
+//     
+//  }
+  void test_populate() {
     // Populate the PrimitiveGroup with junk
     for (int i = 0; i < 30; i++) {
       PVector rand_loc = PVector.random3D();  

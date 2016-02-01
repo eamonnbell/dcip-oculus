@@ -12,6 +12,11 @@ void setup() {
   cam.setMaximumDistance(500);
   
   primitive_group = new PrimitiveGroup();
+  
+//  data_handler = new DataHandler("data.csv");
+//  data_binding = new DataBinding(data_handler);
+  
+  
   noStroke();
  
 }
