@@ -4,29 +4,31 @@ import java.nio.file.*;
 
 class PrimitiveGroup {
 
-  Primitive[] primitives = new Primitive[30];
+  ArrayList<Primitive> primitives = new ArrayList<Primitive>();
 
   PrimitiveGroup() {
-    test_populate();
   }
 
   void update() {
     // Update every Primitive in the PrimitiveGroup
-    for (int i = 0; i < primitives.length; i++) {
-      primitives[i].update();
+    for (Primitive p : primitives) {
+      p.update();
     }
   }
 
   void display() {
-    // Update every Primitive in the PrimitiveGroup
-    for (int i = 0; i < primitives.length; i++) {
-      primitives[i].display();
+    // Display every Primitive in the PrimitiveGroup
+    for (Primitive p : primitives) {
+      p.display();
     }
   }
 
-//  void populate(ArrayList<primitive> primitives_ext) {
-//     
-//  }
+  void populate(ArrayList<Primitive> primitives_in) {
+    for (Primitive p_in : primitives_in) {
+      primitives.add(p_in);
+    }
+  }
+  
   void test_populate() {
     // Populate the PrimitiveGroup with junk
     for (int i = 0; i < 30; i++) {
@@ -34,12 +36,11 @@ class PrimitiveGroup {
       rand_loc.mult(100);
 
       int rand_size = int(random(10, 45));
-
-
+      
       if (i % 2 == 0) {
-        primitives[i] = new PrimitiveSphere(rand_loc, rand_size);
+        primitives.add(new PrimitiveSphere(rand_loc, rand_size));
       } else {
-        primitives[i] = new PrimitiveCube(rand_loc, rand_size);
+        primitives.add(new PrimitiveCube(rand_loc, rand_size));
       }
     }
   }
