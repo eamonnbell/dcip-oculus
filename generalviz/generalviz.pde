@@ -15,7 +15,7 @@ void setup() {
   
   primitive_group = new PrimitiveGroup();
   
-  data_handler = new DataHandler("data.csv");
+  data_handler = new DataHandler("testdata.csv");
   data_binding = new DataBinding(data_handler);
   
   primitive_group.populate(data_binding.bind());
@@ -28,6 +28,7 @@ void draw() {
     lights();
     background(50);
     fill(255);
+    
     primitive_group.update();
     primitive_group.display();
 }

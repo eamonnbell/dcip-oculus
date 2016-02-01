@@ -89,4 +89,42 @@ class PrimitiveCube extends Primitive {
   }
 }
 
+class PrimitiveSpike extends Primitive {
+    PrimitiveSpike(PVector location_, int size_) {
+    super(location_, size_);
+  }
+  
+  void display() {
+    
+    fill(10, 10, 250);
+
+    pushMatrix();
+
+    PVector l = location.get();
+    translate(l.x, l.y, l.z);
+
+    fill(200, 10, 50);
+    box(size);
+    
+    pushMatrix();
+    
+      rotateX(PI/4);
+      rotateY(PI/6);
+      rotateZ(PI/8);
+      
+      fill(200, 10, 50);
+      box(size);
+    
+    popMatrix();
+    
+    fill(200, 200, 250);
+    sphere(size * .75);
+    
+  
+    
+
+    popMatrix();
+  }
+}
+
 
