@@ -11,7 +11,8 @@ class DataBinding {
 
     ArrayList<Primitive> primitives = new ArrayList<Primitive>();
 
-    // Perform a trivial data binding. Later this will be implemented using a grammar of some kind.
+    // Perform a trivial data binding. For every row in the table, make a random cube
+    // Later this will be implemented using a grammar of some kind.
     for (int i = 0; i < data_handler.table.getRowCount (); i++) {
       PVector rand_loc = PVector.random3D();  
       rand_loc.mult(100);
