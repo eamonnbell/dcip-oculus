@@ -1,7 +1,7 @@
 class Scene {
 
   ArrayList<PrimitiveGroup> primitive_groups = new ArrayList<PrimitiveGroup>();
-  //  ArrayList<Axis> axes = new ArrayList<axes>();  
+  ArrayList<Axis> axes = new ArrayList<Axis>();  
 
   Scene() {
   }
@@ -17,6 +17,11 @@ class Scene {
     // Display every PrimitiveGroup in the Scene
     for (PrimitiveGroup p_g : primitive_groups) {
       p_g.display();
+    }
+    
+    // Display every Axis in the Scene
+    for (Axis a : axes) {
+      a.display();
     }
   }
 
