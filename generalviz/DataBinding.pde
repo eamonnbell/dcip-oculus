@@ -17,10 +17,11 @@ class DataBinding {
     bind_schema.put("size", "volume");
   }
 
-  ArrayList bind() {
+  PrimitiveGroup bind() {
 
     ArrayList<Primitive> primitives = new ArrayList<Primitive>();
-
+    PrimitiveGroup primitive_group = new PrimitiveGroup();
+    
     // Perform an almost trivial data binding.
     // Later this will be implemented using a grammar of some kind.
     for (int i = 0; i < data_handler.table.getRowCount (); i++) {
@@ -32,8 +33,9 @@ class DataBinding {
       
       primitives.add(new PrimitiveSpike(rand_loc, primitive_size));
     }
-    
-    return primitives;
+ 
+    primitive_group.populate(primitives);
+    return primitive_group;
   }
 }
 

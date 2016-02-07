@@ -26,9 +26,10 @@ void setup() {
   
   data_handler = new DataHandler("testdata.csv");
   data_binding = new DataBinding(data_handler);
-  primitive_group.populate(data_binding.bind());
   
-  // Add objects to Scene
+  scene.primitive_groups.add(data_binding.bind());
+  
+  // Add axes to Scene
   
   axis1 = new Axis(new PVector(0,0,0), new PVector(1,0,0), 40, color(255,0,0));
   axis2 = new Axis(new PVector(0,0,0), new PVector(0,1,0), 60, color(0,255,0));
@@ -39,8 +40,8 @@ void setup() {
   scene.axes.add(axis2);
   scene.axes.add(axis3);
 
+  // Add axes to Scene
 
-  scene.primitive_groups.add(primitive_group);
   
   noStroke();
  
