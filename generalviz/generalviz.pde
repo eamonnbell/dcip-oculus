@@ -8,12 +8,14 @@ Axis axis3;
 
 Scene scene;
 PrimitiveGroup primitive_group;
+
+DataBindingSchema data_binding_schema;
 DataHandler data_handler;
 DataBinding data_binding;
 
 
 void setup() {
-  size( 640, 640, OPENGL );
+  size( 320, 320, OPENGL );
   
   cam = new PeasyCam(this, 100);
   cam.setMinimumDistance(50);
@@ -25,7 +27,9 @@ void setup() {
   // Do binding
   
   data_handler = new DataHandler("testdata.csv");
-  data_binding = new DataBinding(data_handler);
+  data_binding_schema = new DataBindingSchema();
+  
+  data_binding = new DataBinding(data_handler, data_binding_schema);
   
   scene.primitive_groups.add(data_binding.bind());
   

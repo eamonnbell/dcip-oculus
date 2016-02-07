@@ -3,18 +3,11 @@ class DataBinding {
   // and returns an ArrayList of Primitives.
   
   DataHandler data_handler;
-  HashMap<String, String> bind_schema;
+  DataBindingSchema data_binding_schema;
   
-  DataBinding(DataHandler data_handler_) {
+  DataBinding(DataHandler data_handler_, DataBindingSchema data_binding_schema_) {
     data_handler = data_handler_;
-    bind_schema = new HashMap<String, String>();
-
-    // BindSchema will be a mapping from data columns to Primitive properties
-    // It'll actually have to be Primitive-aware, somehow
-    // Will also have functionality for simple preprocessing
-    // 1. scaling
-    // 2. "factoring" e.g. mapping colors to categorical variables in the data     
-    bind_schema.put("size", "volume");
+    data_binding_schema = data_binding_schema_;   
   }
 
   PrimitiveGroup bind() {
@@ -29,7 +22,7 @@ class DataBinding {
       PVector rand_loc = PVector.random3D();  
       rand_loc.mult(100);
       
-      int primitive_size = row.getInt(bind_schema.get("size"));
+      int primitive_size = row.getInt(data_binding_schema.schema.get("size"));
       
       primitives.add(new PrimitiveSpike(rand_loc, primitive_size));
     }
