@@ -22,13 +22,18 @@ class DataBinding {
       PVector rand_loc = PVector.random3D();  
       rand_loc.mult(100);
       
-      int primitive_size = row.getInt(data_binding_schema.schema.get("size"));
+      int primitive_size = row.getInt(data_binding_schema.get("size"));
       
       primitives.add(new PrimitiveSpike(rand_loc, primitive_size));
     }
  
     primitive_group.populate(primitives);
     return primitive_group;
+  }
+  
+  void validate() {
+    // Validate the applicability of a schema w.r.t. the data from the DataHandler
+    // Throws an Exception if it's messed up.
   }
 }
 
