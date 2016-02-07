@@ -27,6 +27,8 @@ void setup() {
   // Do binding
   
   data_handler = new DataHandler("testdata.csv");
+  
+  
   data_binding_schema = new DataBindingSchema();
   
   data_binding = new DataBinding(data_handler, data_binding_schema);

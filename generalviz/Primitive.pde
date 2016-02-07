@@ -59,7 +59,6 @@ class PrimitiveSphere extends Primitive {
 
     pushMatrix();
     
-
     PVector l = location.get();
     translate(l.x, l.y, l.z);
 

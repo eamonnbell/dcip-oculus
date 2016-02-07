@@ -7,7 +7,8 @@ class DataBinding {
   
   DataBinding(DataHandler data_handler_, DataBindingSchema data_binding_schema_) {
     data_handler = data_handler_;
-    data_binding_schema = data_binding_schema_;   
+    data_binding_schema = data_binding_schema_;
+    this.validate();   
   }
 
   PrimitiveGroup bind() {
@@ -19,6 +20,7 @@ class DataBinding {
     // Later this will be implemented using a grammar of some kind.
     for (int i = 0; i < data_handler.table.getRowCount (); i++) {
       TableRow row = data_handler.table.getRow(i);
+      
       PVector rand_loc = PVector.random3D();  
       rand_loc.mult(100);
       
@@ -34,6 +36,9 @@ class DataBinding {
   void validate() {
     // Validate the applicability of a schema w.r.t. the data from the DataHandler
     // Throws an Exception if it's messed up.
+    
+//    println(data_handler.table.columnTitles);
   }
 }
+
 
