@@ -5,10 +5,12 @@ class Axis {
 
   PVector start;
   PVector end;
-
+  
+  
+  float tick_count;
   color stroke_color;
 
-  Axis(PVector origin_, PVector direction_, int len_, color color_) {
+  Axis(PVector origin_, PVector direction_, int len_, color stroke_color_, int tick_count_) {
     start = origin_;
 
     direction = direction_;
@@ -17,8 +19,10 @@ class Axis {
     direction.mult(len_);
 
     end = PVector.add(start, direction_);
+    
+    tick_count = float(tick_count_);
 
-    stroke_color = color_;
+    stroke_color = stroke_color_;
   }
 
 
@@ -52,9 +56,6 @@ class Axis {
     float tick_count = 10.0;
 
     float tick_spacing = axis_length / tick_count;
-    
-    println("tick_spacing");
-    println(tick_spacing);
 
     for (float i = 0.0; i < axis_length; i += tick_spacing) {
       PVector extent = PVector.sub(end, start);
