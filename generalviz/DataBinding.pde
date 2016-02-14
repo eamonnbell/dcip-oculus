@@ -3,18 +3,12 @@ class DataBinding {
   // and returns an ArrayList of Primitives.
   
   DataHandler data_handler;
-  HashMap<String, String> bind_schema;
+  DataBindingSchema data_binding_schema;
   
-  DataBinding(DataHandler data_handler_) {
+  DataBinding(DataHandler data_handler_, DataBindingSchema data_binding_schema_) {
     data_handler = data_handler_;
-    bind_schema = new HashMap<String, String>();
-
-    // BindSchema will be a mapping from data columns to Primitive properties
-    // It'll actually have to be Primitive-aware, somehow
-    // Will also have functionality for simple preprocessing
-    // 1. scaling
-    // 2. "factoring" e.g. mapping colors to categorical variables in the data     
-    bind_schema.put("size", "volume");
+    data_binding_schema = data_binding_schema_;
+    this.validate();   
   }
 
   PrimitiveGroup bind() {
@@ -26,16 +20,33 @@ class DataBinding {
     // Later this will be implemented using a grammar of some kind.
     for (int i = 0; i < data_handler.table.getRowCount (); i++) {
       TableRow row = data_handler.table.getRow(i);
+      
       PVector rand_loc = PVector.random3D();  
       rand_loc.mult(100);
       
-      int primitive_size = row.getInt(bind_schema.get("size"));
+      int primitive_size = row.getInt(data_binding_schema.get("size"));
+      int primitive_type = int(data_binding_schema.get("primitive_type"));
       
-      primitives.add(new PrimitiveSpike(rand_loc, primitive_size));
+      PrimitiveFactory pf = new PrimitiveFactory(primitive_type);
+      
+      Primitive p = pf.get();
+      
+      p.setSize(primitive_size);
+      p.setLocation(rand_loc);
+            
+      primitives.add(p);
     }
  
     primitive_group.populate(primitives);
     return primitive_group;
   }
+  
+  void validate() {
+    // Validate the applicability of a schema w.r.t. the data from the DataHandler
+    // Throws an Exception if it's messed up.
+    
+//    println(data_handler.table.columnTitles);
+  }
 }
+
 
