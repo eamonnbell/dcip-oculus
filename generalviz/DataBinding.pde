@@ -25,8 +25,16 @@ class DataBinding {
       rand_loc.mult(100);
       
       int primitive_size = row.getInt(data_binding_schema.get("size"));
+      int primitive_type = int(data_binding_schema.get("primitive_type"));
       
-      primitives.add(new PrimitiveSpike(rand_loc, primitive_size));
+      PrimitiveFactory pf = new PrimitiveFactory(primitive_type);
+      
+      Primitive p = pf.get();
+      
+      p.setSize(primitive_size);
+      p.setLocation(rand_loc);
+            
+      primitives.add(p);
     }
  
     primitive_group.populate(primitives);

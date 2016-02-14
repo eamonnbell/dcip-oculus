@@ -18,6 +18,21 @@ class Primitive {
     velocity = new PVector(0, 0, 0);
   }
 
+  Primitive() {
+    target_location = new PVector(0, 0, 0);
+    size = 0;
+    location = new PVector(0, 0, 0);
+    velocity = new PVector(0, 0, 0);
+  }
+
+  void setSize(int size_) {
+    this.size = size_;
+  }
+
+  void setLocation(PVector location_) {
+    this.location = location_;
+  }
+
   void move_to(PVector target) {
     target_location = target;
 
@@ -26,7 +41,7 @@ class Primitive {
     velocity.normalize();
     velocity.mult(3);
   }
-  
+
   void update() {
     // Increment location by velocity on every update
     location.add(velocity);
@@ -42,23 +57,26 @@ class Primitive {
     PVector l = location.get();
     l.add(new PVector(width/2, height/2, 0));
   }
-  
+
   void display() {
   }
 }
 
 class PrimitiveSphere extends Primitive {
-  
+
   PrimitiveSphere(PVector location_, int size_) {
     super(location_, size_);
   }
-  
+
+  PrimitiveSphere() {
+  }
+
   void display() {
 
     fill(250, 10, 10);
 
     pushMatrix();
-    
+
     PVector l = location.get();
     translate(l.x, l.y, l.z);
 
@@ -69,12 +87,15 @@ class PrimitiveSphere extends Primitive {
 }
 
 class PrimitiveCube extends Primitive {
-    PrimitiveCube(PVector location_, int size_) {
+  PrimitiveCube(PVector location_, int size_) {
     super(location_, size_);
   }
-  
+
+  PrimitiveCube() {
+  }
+
   void display() {
-    
+
     fill(10, 10, 250);
 
     pushMatrix();
@@ -89,12 +110,12 @@ class PrimitiveCube extends Primitive {
 }
 
 class PrimitiveSpike extends Primitive {
-    PrimitiveSpike(PVector location_, int size_) {
+  PrimitiveSpike(PVector location_, int size_) {
     super(location_, size_);
   }
-  
+
   void display() {
-    
+
     fill(10, 10, 250);
 
     pushMatrix();
@@ -104,26 +125,45 @@ class PrimitiveSpike extends Primitive {
 
     fill(200, 10, 50);
     box(size);
-    
+
     pushMatrix();
-    
-      rotateX(PI/4);
-      rotateY(PI/6);
-      rotateZ(PI/8);
-      
-      fill(200, 10, 50);
-      box(size);
-    
+
+    rotateX(PI/4);
+    rotateY(PI/6);
+    rotateZ(PI/8);
+
+    fill(200, 10, 50);
+    box(size);
+
     popMatrix();
-    
+
     fill(200, 200, 250);
     sphere(size * .75);
-    
-  
-    
+
+
+
 
     popMatrix();
   }
 }
 
+class PrimitiveFactory {
+
+  Primitive p; 
+
+  PrimitiveFactory(int primitive_type) {
+    switch (primitive_type) {
+    case 0: 
+      p = new PrimitiveSphere();
+      break;
+    case 1: 
+      p = new PrimitiveCube();
+      break;
+    }
+  }
+
+  Primitive get() {
+    return p;
+  }
+}
 
