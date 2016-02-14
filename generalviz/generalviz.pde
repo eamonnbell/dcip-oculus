@@ -7,7 +7,6 @@ Axis axis2;
 Axis axis3;
 
 Scene scene;
-PrimitiveGroup primitive_group;
 
 DataBindingSchema data_binding_schema;
 DataHandler data_handler;
@@ -23,8 +22,6 @@ void setup() {
   
   scene = new Scene(true);
   
-  primitive_group = new PrimitiveGroup();
-    
   
   data_handler = new DataHandler("testdata.csv");
   
