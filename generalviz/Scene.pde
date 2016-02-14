@@ -3,7 +3,10 @@ class Scene {
   ArrayList<PrimitiveGroup> primitive_groups = new ArrayList<PrimitiveGroup>();
   ArrayList<Axis> axes = new ArrayList<Axis>();  
 
-  Scene() {
+  Scene(boolean draw_axes_) {
+    if (draw_axes_) {
+      add_axes();
+    }
   }
 
   void update() {
@@ -18,11 +21,22 @@ class Scene {
     for (PrimitiveGroup p_g : primitive_groups) {
       p_g.display();
     }
-    
+
     // Display every Axis in the Scene
     for (Axis a : axes) {
       a.display();
     }
   }
 
+  void add_axes() {
+    axis1 = new Axis(new PVector(0, 0, 0), new PVector(1, 0, 0), 40, color(255, 0, 0), 10);
+    axis2 = new Axis(new PVector(0, 0, 0), new PVector(0, 1, 0), 60, color(0, 255, 0), 20);
+    axis3 = new Axis(new PVector(0, 0, 0), new PVector(0, 0, 1), 60, color(0, 0, 255), 3);
+
+
+    this.axes.add(axis1);
+    this.axes.add(axis2);
+    this.axes.add(axis3);
+  }
 }
+
