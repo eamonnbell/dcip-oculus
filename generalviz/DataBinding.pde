@@ -45,8 +45,9 @@ class DataBinding {
       color[] pal = {#ffff00, #ff0000, #33ff00};
       
     
-//      p.setColor(pal[color_map.get(row.getString(data_binding_schema.get("fill_color")))]);
-      p.setColor(pal[0]);           
+      int pal_index = (Integer) color_map.get(row.getString(data_binding_schema.get("fill_color")));
+      p.setColor(pal[pal_index]);
+      
       primitives.add(p);
     }
  
@@ -70,10 +71,7 @@ class DataBinding {
       else {
         color_map.put(obs, track);
         track += 1;
-      }
-      
-      println(color_map);
-      
+      }     
     }
        
     return color_map;
