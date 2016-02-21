@@ -22,7 +22,7 @@ class DataBinding {
     // Perform an almost trivial data binding.
     // Later this will be implemented using a grammar of some kind.
 
-    HashMap color_map = colorify();    
+    HashMap color_map = colorify_qualitative();    
     
     for (int i = 0; i < data_handler.table.getRowCount(); i++) {
       TableRow row = data_handler.table.getRow(i);
@@ -42,11 +42,8 @@ class DataBinding {
       p.setSize(primitive_size);
       p.setLocation(rand_loc);
       
-      color[] pal = {#ffff00, #ff0000, #33ff00};
-      
-    
-      int pal_index = (Integer) color_map.get(row.getString(data_binding_schema.get("fill_color")));
-      p.setColor(pal[pal_index]);
+      int fill_color = (Integer) color_map.get(row.getString(data_binding_schema.get("fill_color")));
+      p.setColor(fill_color);
       
       primitives.add(p);
     }
@@ -55,7 +52,7 @@ class DataBinding {
     return primitive_group;
   }
   
-  HashMap colorify() {
+  HashMap colorify_qualitative() {
     HashMap<String, Integer> color_map = new HashMap<String, Integer>();
     
     int track = 0;
@@ -65,12 +62,50 @@ class DataBinding {
       
       String obs = row.getString(data_binding_schema.get("fill_color"));
       
+      color[] pal = {#ffff00, #ff0000, #33ff00};
+      
+      if (color_map.containsKey(obs)) {
+        // don't do anything
+      }
+      else {
+        color_map.put(obs, pal[track]);
+        track += 1;
+      }     
+    }
+       
+    return color_map;
+  }
+  
+  HashMap colorify_quantitative() {
+    HashMap<Float, Integer> color_map = new HashMap<Float, Integer>();
+    
+    int track = 0;
+    
+    ArrayList<Float> observations = new ArrayList<Float>();
+    
+    for (int i = 0; i < data_handler.table.getRowCount(); i++) {
+      TableRow row = data_handler.table.getRow(i);
+      
+      float obs = row.getFloat(data_binding_schema.get("fill_color"));
+      observations.add(obs);
+    }
+    
+    float max = Collections.max(observations);
+    float min = Collections.min(observations);
+    
+    println(max);
+    println(min);
+
+    for (int i = 0; i < data_handler.table.getRowCount(); i++) {
+      TableRow row = data_handler.table.getRow(i);
+      
+      float obs = row.getFloat(data_binding_schema.get("fill_color"));
+      
       if (color_map.containsKey(obs)) {
         // don't do anything
       }
       else {
         color_map.put(obs, track);
-        track += 1;
       }     
     }
        
