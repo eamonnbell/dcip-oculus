@@ -3,18 +3,18 @@ class Primitive {
   PVector velocity;
   PVector target_location;
 
-  Date date;
-
   int size;
+  color fill_color;
+  
   String filename;
-
   Music sound;
 
-  Primitive(PVector location_, int size_) {
+  Primitive(PVector location_, int size_, color fill_color_) {
     // Primitives represent data binding and have location and size.
     location = location_;
     target_location = location_;
     size = size_;
+    fill_color = fill_color_;
     velocity = new PVector(0, 0, 0);
   }
 
@@ -31,6 +31,10 @@ class Primitive {
 
   void setLocation(PVector location_) {
     this.location = location_;
+  }
+  
+  void setColor(color fill_color_) {
+    this.fill_color = fill_color_;
   }
 
   void move_to(PVector target) {
@@ -64,8 +68,8 @@ class Primitive {
 
 class PrimitiveSphere extends Primitive {
 
-  PrimitiveSphere(PVector location_, int size_) {
-    super(location_, size_);
+  PrimitiveSphere(PVector location_, int size_, color fill_color_) {
+    super(location_, size_, fill_color_);
   }
 
   PrimitiveSphere() {
@@ -73,7 +77,7 @@ class PrimitiveSphere extends Primitive {
 
   void display() {
 
-    fill(250, 10, 10);
+    fill(fill_color);
 
     pushMatrix();
 
@@ -87,8 +91,8 @@ class PrimitiveSphere extends Primitive {
 }
 
 class PrimitiveCube extends Primitive {
-  PrimitiveCube(PVector location_, int size_) {
-    super(location_, size_);
+  PrimitiveCube(PVector location_, int size_, color fill_color_) {
+    super(location_, size_, fill_color_);
   }
 
   PrimitiveCube() {
@@ -96,7 +100,7 @@ class PrimitiveCube extends Primitive {
 
   void display() {
 
-    fill(10, 10, 250);
+    fill(fill_color);
 
     pushMatrix();
 
@@ -110,20 +114,23 @@ class PrimitiveCube extends Primitive {
 }
 
 class PrimitiveSpike extends Primitive {
-  PrimitiveSpike(PVector location_, int size_) {
-    super(location_, size_);
+  PrimitiveSpike(PVector location_, int size_, color fill_color_) {
+    super(location_, size_, fill_color_);
+  }
+  
+  PrimitiveSpike() {
   }
 
   void display() {
 
-    fill(10, 10, 250);
+    fill(fill_color);
 
     pushMatrix();
 
     PVector l = location.get();
     translate(l.x, l.y, l.z);
 
-    fill(200, 10, 50);
+    fill(fill_color);
     box(size);
 
     pushMatrix();
@@ -132,15 +139,13 @@ class PrimitiveSpike extends Primitive {
     rotateY(PI/6);
     rotateZ(PI/8);
 
-    fill(200, 10, 50);
+    fill(fill_color);
     box(size);
 
     popMatrix();
 
-    fill(200, 200, 250);
+    fill(fill_color);
     sphere(size * .75);
-
-
 
 
     popMatrix();
@@ -158,6 +163,9 @@ class PrimitiveFactory {
       break;
     case 1: 
       p = new PrimitiveCube();
+      break;
+    case 2: 
+      p = new PrimitiveSpike();
       break;
     }
   }

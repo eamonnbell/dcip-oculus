@@ -24,6 +24,8 @@ class DataBinding {
       PVector rand_loc = PVector.random3D();  
       rand_loc.mult(100);
       
+      color rand_color = color(random(255), random(255), random(255));
+      
       int primitive_size = row.getInt(data_binding_schema.get("size"));
       int primitive_type = int(data_binding_schema.get("primitive_type"));
       
@@ -33,6 +35,7 @@ class DataBinding {
       
       p.setSize(primitive_size);
       p.setLocation(rand_loc);
+      p.setColor(rand_color);
             
       primitives.add(p);
     }

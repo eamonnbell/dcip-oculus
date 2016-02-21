@@ -28,21 +28,5 @@ class PrimitiveGroup {
       primitives.add(p_in);
     }
   }
-  
-  void test_populate() {
-    // Populate the PrimitiveGroup with junk
-    for (int i = 0; i < 30; i++) {
-      PVector rand_loc = PVector.random3D();  
-      rand_loc.mult(100);
-
-      int rand_size = int(random(10, 45));
-      
-      if (i % 2 == 0) {
-        primitives.add(new PrimitiveSphere(rand_loc, rand_size));
-      } else {
-        primitives.add(new PrimitiveCube(rand_loc, rand_size));
-      }
-    }
-  }
 }
 

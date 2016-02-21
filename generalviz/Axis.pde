@@ -6,7 +6,6 @@ class Axis {
   PVector start;
   PVector end;
   
-  
   float tick_count;
   color stroke_color;
 
@@ -25,14 +24,11 @@ class Axis {
     stroke_color = stroke_color_;
   }
 
-
-
   void display() {
     strokeWeight(2);
     stroke(stroke_color);
     // Draw axis line
     line(start.x, start.y, start.z, end.x, end.y, end.z);
-
 
     // Draw end arrow
     pushMatrix();
