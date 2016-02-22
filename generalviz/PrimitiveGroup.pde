@@ -28,5 +28,9 @@ class PrimitiveGroup {
       primitives.add(p_in);
     }
   }
+  
+  void depopulate() {
+    this.primitives.clear();
+  }
 }
 

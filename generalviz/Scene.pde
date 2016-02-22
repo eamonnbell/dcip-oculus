@@ -27,6 +27,12 @@ class Scene {
       a.display();
     }
   }
+  
+  void clear_scene() {
+    for (PrimitiveGroup p_g : primitive_groups) {
+      p_g.depopulate();
+    }
+  }
 
   void add_axes() {
     axis1 = new Axis(new PVector(0, 0, 0), new PVector(1, 0, 0), 40, color(255, 0, 0), 10);
