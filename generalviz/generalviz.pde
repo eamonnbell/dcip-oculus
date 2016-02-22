@@ -25,12 +25,12 @@ void setup() {
   
   data_handler = new DataHandler("testdata.csv");
   
-  
   data_binding_schema = new DataBindingSchema();
   
   data_binding = new DataBinding(data_handler, data_binding_schema);
   
   scene.primitive_groups.add(data_binding.bind());
+
   
   
 
@@ -45,7 +45,7 @@ void draw() {
     lights();
     background(50);
     fill(255);
-    
+
     scene.update();
     scene.display();
 }
