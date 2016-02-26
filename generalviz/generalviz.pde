@@ -43,8 +43,6 @@ void setup() {
   
   data_binding = new DataBinding(data_handler, data_binding_schema_b);
   scene.primitive_groups.add(data_binding.bind());
-
-
   
   noStroke();
  

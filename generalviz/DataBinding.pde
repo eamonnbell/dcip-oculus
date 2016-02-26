@@ -111,8 +111,8 @@ class DataBinding {
 
       float obs = row.getFloat(data_binding_schema.get("fill_color"));
 
-      color LERP_FROM = color(204, 102, 0);
-      color LERP_TO = color(0, 102, 153);
+      color LERP_FROM = color(0, 0, 0);
+      color LERP_TO = color(255, 255, 255);
 
       if (color_map.containsKey(obs)) {
         // don't do anything
