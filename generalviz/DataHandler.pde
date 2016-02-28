@@ -1,18 +1,22 @@
 class DataHandler {
   String filename;
   Table table;
-  Table table_two;
   
-  ArrayList<String> headings;
   String[] column_titles; 
-  
+
   DataHandler(String filename_) {
     filename = filename_;
-    table = loadTable(filename, "header");
-    table_two = loadTable(filename);
-//    println(Table.class.getDeclaredFields());
-//    column_titles = table.columnTitles;
-        
+    table = loadTable(filename, "header");    
+
+    try {
+      java.lang.reflect.Field f = table.getClass().getDeclaredField("columnTitles");
+      f.setAccessible(true);
+      column_titles = (String[]) f.get(table);
+
+    } 
+    catch (Exception exc) {
+      exc.printStackTrace();
+    }
   }
 }
 
