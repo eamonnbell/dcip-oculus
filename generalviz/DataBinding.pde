@@ -151,8 +151,6 @@ class DataBinding {
       tests.add(test);
     }
     
-    println(tests);
-
     if (tests.contains(false)) {
       throw new InvalidDataBindingException("Validation test failed.");
     }
