@@ -1,5 +1,12 @@
 import java.util.*;
 
+class InvalidDataBindingException extends Exception
+{
+  public InvalidDataBindingException (String message)
+  {
+    super(message);
+  }
+}
 
 class DataBinding {
   // A DataBinding takes a DataHandler and a DataBindingSchema
@@ -11,7 +18,13 @@ class DataBinding {
   DataBinding(DataHandler data_handler_, DataBindingSchema data_binding_schema_) {
     data_handler = data_handler_;
     data_binding_schema = data_binding_schema_;
-    this.validate();
+
+    try {
+      this.validate();
+    }
+    catch (Exception exc) {
+      exc.printStackTrace();
+    }
   }
 
   PrimitiveGroup bind() {
@@ -124,11 +137,25 @@ class DataBinding {
     return color_map;
   }
 
-  void validate() {
-    // Validate the applicability of a schema w.r.t. the data from the DataHandler
-    // Throws an Exception if it's messed up.
+  void validate() throws InvalidDataBindingException {
+    String[] aesthetics = { 
+      "size", "fill_color"
+    };
 
-    //    println(data_handler.table.columnTitles);
+    Set<String> column_titles = new HashSet<String>(Arrays.asList(data_handler.get_column_titles()));
+
+    ArrayList<Boolean> tests = new ArrayList<Boolean>();    
+
+    for (int i = 0; i < aesthetics.length; i++) {
+      Boolean test = column_titles.contains(data_binding_schema.get(aesthetics[i]));
+      tests.add(test);
+    }
+    
+    println(tests);
+
+    if (tests.contains(false)) {
+      throw new InvalidDataBindingException("Validation test failed.");
+    }
   }
 }
 
