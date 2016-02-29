@@ -35,7 +35,7 @@ class DataBinding {
     String fill_color_type = data_binding_schema.get("fill_color_type");
     HashMap color_map;
 
-    if (fill_color_type == "quantitative") {
+    if (fill_color_type.equals("quantitative")) {
       color_map = colorify_quantitative();
     } else {
       color_map = colorify_qualitative();
@@ -62,7 +62,7 @@ class DataBinding {
 
       int fill_color;
 
-      if (fill_color_type == "quantitative") {
+      if (fill_color_type.equals("quantitative")) {
         fill_color = (Integer) color_map.get(row.getFloat(data_binding_schema.get("fill_color")));
       } else {
         fill_color = (Integer) color_map.get(row.getString(data_binding_schema.get("fill_color")));
@@ -84,9 +84,10 @@ class DataBinding {
 
     for (int i = 0; i < data_handler.table.getRowCount (); i++) {
       TableRow row = data_handler.table.getRow(i);
-
-      String obs = row.getString(data_binding_schema.get("fill_color"));
-
+      
+      String col_name = data_binding_schema.get("fill_color");
+      String obs = row.getString(col_name);
+      
       color[] pal = {
         #ffff00, #ff0000, #33ff00, #001100
       };

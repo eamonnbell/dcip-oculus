@@ -31,12 +31,8 @@ void setup() {
     
   data_binding_schema_a = new DataBindingSchema("/home/eamonn/Projects/dcip-oculus/generalviz/data/testA.yaml");
   data_binding_schema_b = new DataBindingSchema("/home/eamonn/Projects/dcip-oculus/generalviz/data/testB.yaml");
-  
-  println(data_binding_schema_a.schema);
-    
+      
   data_binding = new DataBinding(data_handler, data_binding_schema_a);
-  
-  
   scene.primitive_groups.add(data_binding.bind());
   
   noStroke();

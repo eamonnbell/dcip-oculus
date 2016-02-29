@@ -13,7 +13,7 @@ class DataBindingSchema {
     try {
     YamlReader reader = new YamlReader(new FileReader(filename));
     Object object = reader.read();
-    schema = (HashMap)object;
+    schema = (HashMap<String, String>)object;
     
   } catch (Exception exc) {
       exc.printStackTrace();

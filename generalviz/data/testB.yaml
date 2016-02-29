@@ -1,4 +1,4 @@
 size: volume 
 primitive_type: 0
 fill_color: volume
-fill_color_type: qualitative
+fill_color_type: quantitative
