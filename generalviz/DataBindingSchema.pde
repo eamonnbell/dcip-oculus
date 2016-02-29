@@ -1,9 +1,23 @@
+import java.io.FileReader;
+import com.esotericsoftware.yamlbeans.YamlReader;
+
 class DataBindingSchema {
 
   HashMap<String, String> schema;
 
   DataBindingSchema() {
     schema = new HashMap<String, String>();
+  }
+  
+  DataBindingSchema(String filename) {
+    try {
+    YamlReader reader = new YamlReader(new FileReader(filename));
+    Object object = reader.read();
+    schema = (HashMap)object;
+    
+  } catch (Exception exc) {
+      exc.printStackTrace();
+    }
   }
   
   String get(String s) {

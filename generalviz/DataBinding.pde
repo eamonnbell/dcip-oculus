@@ -88,9 +88,9 @@ class DataBinding {
       String obs = row.getString(data_binding_schema.get("fill_color"));
 
       color[] pal = {
-        #ffff00, #ff0000, #33ff00
+        #ffff00, #ff0000, #33ff00, #001100
       };
-
+      
       if (color_map.containsKey(obs)) {
         // don't do anything
       } else {

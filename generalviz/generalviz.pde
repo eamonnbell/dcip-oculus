@@ -11,6 +11,9 @@ Scene scene;
 DataBindingSchema data_binding_schema_a;
 DataBindingSchema data_binding_schema_b;
 
+DataBindingSchema dbc;
+
+
 DataHandler data_handler;
 DataBinding data_binding;
 
@@ -24,24 +27,16 @@ void setup() {
   
   scene = new Scene(true);
   
-  
   data_handler = new DataHandler("testdata.csv");
+    
+  data_binding_schema_a = new DataBindingSchema("/home/eamonn/Projects/dcip-oculus/generalviz/data/testA.yaml");
+  data_binding_schema_b = new DataBindingSchema("/home/eamonn/Projects/dcip-oculus/generalviz/data/testB.yaml");
   
-  data_binding_schema_a = new DataBindingSchema();
+  println(data_binding_schema_a.schema);
+    
+  data_binding = new DataBinding(data_handler, data_binding_schema_a);
   
-  data_binding_schema_a.schema.put("size", "volume");
-  data_binding_schema_a.schema.put("primitive_type", "1");
-  data_binding_schema_a.schema.put("fill_color", "volume");
-  data_binding_schema_a.schema.put("fill_color_type", "quantitative");
   
-  data_binding_schema_b = new DataBindingSchema();
-  
-  data_binding_schema_b.schema.put("size", "volume");
-  data_binding_schema_b.schema.put("primitive_type", "0");
-  data_binding_schema_b.schema.put("fill_color", "genre");
-  data_binding_schema_b.schema.put("fill_color_type", "qualitative");
-  
-  data_binding = new DataBinding(data_handler, data_binding_schema_b);
   scene.primitive_groups.add(data_binding.bind());
   
   noStroke();
