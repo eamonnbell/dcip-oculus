@@ -88,9 +88,8 @@ class DataBinding {
       String col_name = data_binding_schema.get("fill_color");
       String obs = row.getString(col_name);
       
-      color[] pal = {
-        #ffff00, #ff0000, #33ff00, #001100
-      };
+      Palette p = new Palette(3);
+      Integer[] pal = p.pal.toArray(new Integer[0]);
       
       if (color_map.containsKey(obs)) {
         // don't do anything
