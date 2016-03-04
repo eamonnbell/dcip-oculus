@@ -1,4 +1,4 @@
-size: volume 
+size: trees 
 primitive_type: 1
-fill_color: genre
-fill_color_type: qualitative
+fill_color: volume
+fill_color_type: quantitative
