@@ -26,14 +26,15 @@ DataBinding data_binding;
 
 void setup() {
   size( 320, 320, OPENGL );
-  
+
   data_handler = new DataHandler("testdata.csv");
 
+  // TODO: Read all YAMLs in and add to a list
   data_binding_schema_a = new DataBindingSchema("/home/eamonn/Projects/dcip-oculus/generalviz/data/testA.yaml");
   data_binding_schema_b = new DataBindingSchema("/home/eamonn/Projects/dcip-oculus/generalviz/data/testB.yaml");
 
   schemas = new ArrayList<DataBindingSchema>();
-  
+
   schemas.add(data_binding_schema_a);
   schemas.add(data_binding_schema_b);
 
@@ -47,7 +48,7 @@ void setup() {
 
   scene = new Scene(true);
 
-  
+
   data_binding = new DataBinding(data_handler, data_binding_schema_a);
   scene.primitive_groups.add(data_binding.bind());
 
@@ -63,28 +64,9 @@ void draw() {
   scene.display();
 }
 
-void keyPressed() {
-
+void switchDataBindingSchema(DataBindingSchema s) {
   scene.clear_scene();
-
-  if (key == 'a' || key == 'A') {
-    data_binding = new DataBinding(data_handler, data_binding_schema_a);
-    scene.primitive_groups.add(data_binding.bind());
-  } else if (key == 'b' || key == 'B') {
-    data_binding = new DataBinding(data_handler, data_binding_schema_b);
-    scene.primitive_groups.add(data_binding.bind());
-  }
-}
-
-void switchToA() {
-  scene.clear_scene();
-  data_binding = new DataBinding(data_handler, data_binding_schema_a);
-  scene.primitive_groups.add(data_binding.bind());
-}
-
-void switchToB() {
-  scene.clear_scene();
-  data_binding = new DataBinding(data_handler, data_binding_schema_b);
+  data_binding = new DataBinding(data_handler, s);
   scene.primitive_groups.add(data_binding.bind());
 }
 
@@ -115,9 +97,9 @@ public class ControlFrame extends PApplet {
     frameRate(25);
     cp5 = new ControlP5(this);
     ddl = cp5.addDropdownList("activeDataBinding").setPosition(10, 10);
-    for (int i = 0; i < schemas.size(); i++) {
-       ddl.addItem(schemas.get(i).get("name"), i);
-    } 
+    for (int i = 0; i < schemas.size (); i++) {
+      ddl.addItem(schemas.get(i).get("name"), i);
+    }
   }
 
   public void draw() {
@@ -137,16 +119,12 @@ public class ControlFrame extends PApplet {
   void controlEvent(ControlEvent theEvent) {
 
     if (theEvent.isGroup()) {
-      // check if the Event was triggered from a ControlGroup
-      println("event from group : "+theEvent.getGroup().getValue()+" from "+theEvent.getGroup());
-    } else if (theEvent.isController()) {
-      println("event from controller : "+theEvent.getController().getValue()+" from "+theEvent.getController());
-      float v = theEvent.getController().getValue();
+    } 
+    else if (theEvent.isController()) {
+      int v = (int) theEvent.getController().getValue();
 
-      if (v == 0.0) {
-         switchToA();
-      } else if (v == 1.0) {
-         switchToB();
+      if (v < schemas.size()) {
+        switchDataBindingSchema(schemas.get(v));
       }
     }
   }
