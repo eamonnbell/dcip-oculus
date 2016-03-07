@@ -1,6 +1,9 @@
 import peasy.*;
+
 import java.awt.Frame;
 import java.awt.BorderLayout;
+import java.io.File;
+
 import controlP5.*;
 
 private ControlP5 cp5;
@@ -16,9 +19,6 @@ Axis axis3;
 
 Scene scene;
 
-DataBindingSchema data_binding_schema_a;
-DataBindingSchema data_binding_schema_b;
-
 ArrayList<DataBindingSchema> schemas;
 
 DataHandler data_handler;
@@ -28,16 +28,21 @@ void setup() {
   size( 320, 320, OPENGL );
 
   data_handler = new DataHandler("testdata.csv");
-
-  // TODO: Read all YAMLs in and add to a list
-  data_binding_schema_a = new DataBindingSchema("/home/eamonn/Projects/dcip-oculus/generalviz/data/testA.yaml");
-  data_binding_schema_b = new DataBindingSchema("/home/eamonn/Projects/dcip-oculus/generalviz/data/testB.yaml");
-
+ 
+  File dir = new File(dataPath(""));
+  File[] files = dir.listFiles();
+  
   schemas = new ArrayList<DataBindingSchema>();
 
-  schemas.add(data_binding_schema_a);
-  schemas.add(data_binding_schema_b);
-
+  for(int i = 0; i < files.length; i++) {
+    String path = files[i].getAbsolutePath();
+    
+    if (path.toLowerCase().endsWith(".yaml")) {
+      DataBindingSchema dbs = new DataBindingSchema(path);
+      println(path);
+      schemas.add(dbs);
+    }
+   }
 
   cp5 = new ControlP5(this);
   cf = addControlFrame("extra", 200, 200, schemas);
@@ -49,7 +54,7 @@ void setup() {
   scene = new Scene(true);
 
 
-  data_binding = new DataBinding(data_handler, data_binding_schema_a);
+  data_binding = new DataBinding(data_handler, schemas.get(0));
   scene.primitive_groups.add(data_binding.bind());
 
   noStroke();
@@ -62,6 +67,23 @@ void draw() {
 
   scene.update();
   scene.display();
+}
+
+void addDataBindingSchemas() {
+  File dir = new File(dataPath(""));
+  File[] files = dir.listFiles();
+  
+  schemas = new ArrayList<DataBindingSchema>();
+
+  for(int i = 0; i < files.length; i++) {
+    String path = files[i].getAbsolutePath();
+    
+    if (path.toLowerCase().endsWith(".yaml")) {
+      DataBindingSchema dbs = new DataBindingSchema(path);
+      println(path);
+      schemas.add(dbs);
+    }
+   }
 }
 
 void switchDataBindingSchema(DataBindingSchema s) {
