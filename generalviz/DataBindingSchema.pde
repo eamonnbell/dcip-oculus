@@ -13,7 +13,9 @@ class DataBindingSchema {
     try {
     YamlReader reader = new YamlReader(new FileReader(filename));
     Object object = reader.read();
-    schema = (HashMap<String, String>)object;
+    schema = (HashMap<String, String>) object;
+    String name = filename.substring(filename.lastIndexOf('/') + 1);
+    schema.put("name", name);
     
   } catch (Exception exc) {
       exc.printStackTrace();
