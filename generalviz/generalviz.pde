@@ -132,18 +132,11 @@ public class ControlFrame extends PApplet {
     h = theHeight;
     schemas = theSchemas;
   }
-
-  void controlEvent(ControlEvent theEvent) {
-
-    if (theEvent.isGroup()) {
-    } 
-    else if (theEvent.isController()) {
-      int v = (int) theEvent.getController().getValue();
-
-      if (v < schemas.size()) {
-        switchDataBindingSchema(schemas.get(v));
-      }
-    }
+  
+  public void activeDataBinding(int theValue) {
+    if (theValue < schemas.size()) {
+        switchDataBindingSchema(schemas.get(theValue));
+      };
   }
 
   public ControlP5 control() {
