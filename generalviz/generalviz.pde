@@ -9,7 +9,6 @@ import controlP5.*;
 private ControlP5 cp5;
 
 ControlFrame cf;
-DropdownList ddl;
 
 PeasyCam cam;
 
@@ -87,6 +86,15 @@ void switchDataBindingSchema(DataBindingSchema s) {
   scene.primitive_groups.add(data_binding.bind());
 }
 
+void switchAxes() {
+  if (scene.axes.size() > 0) {
+    scene.remove_axes();
+  }
+  else {
+    scene.add_axes();
+  }
+}
+
 // ControlP5 stuff here
 
 ControlFrame addControlFrame(String theName, int theWidth, int theHeight, ArrayList<DataBindingSchema> theSchemas) {
@@ -107,16 +115,23 @@ public class ControlFrame extends PApplet {
   int w, h;
   ArrayList<DataBindingSchema> schemas;
 
+
   int abc = 100;
 
   public void setup() {
     size(w, h);
     frameRate(25);
     cp5 = new ControlP5(this);
-    ddl = cp5.addDropdownList("activeDataBinding").setPosition(10, 10);
+    
+    DropdownList ddl = cp5.addDropdownList("activeDataBinding").setPosition(10, 40);
+    
     for (int i = 0; i < schemas.size (); i++) {
       ddl.addItem(schemas.get(i).get("name"), i);
     }
+    
+    cp5.addButton("toggleAxes").setPosition(10, 10).setSize(100, 13);
+    
+    
   }
 
   public void draw() {
@@ -137,6 +152,10 @@ public class ControlFrame extends PApplet {
     if (theValue < schemas.size()) {
         switchDataBindingSchema(schemas.get(theValue));
       };
+  }
+  
+  public void toggleAxes(int theValue) {
+    switchAxes();
   }
 
   public ControlP5 control() {
