@@ -39,7 +39,7 @@ void setup() {
    }
 
   cp5 = new ControlP5(this);
-  cf = addControlFrame("extra", 200, 200, schemas);
+  cf = addControlFrame("Scene Control", 120, 150, schemas);
 
   cam = new PeasyCam(this, 100);
   cam.setMinimumDistance(50);
@@ -130,8 +130,6 @@ public class ControlFrame extends PApplet {
     }
     
     cp5.addButton("toggleAxes").setPosition(10, 10).setSize(100, 13);
-    
-    
   }
 
   public void draw() {
