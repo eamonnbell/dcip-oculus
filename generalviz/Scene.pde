@@ -35,9 +35,9 @@ class Scene {
   }
 
   void add_axes() {
-    axis1 = new Axis(new PVector(0, 0, 0), new PVector(1, 0, 0), 40, color(255, 0, 0), 10);
-    axis2 = new Axis(new PVector(0, 0, 0), new PVector(0, 1, 0), 60, color(0, 255, 0), 20);
-    axis3 = new Axis(new PVector(0, 0, 0), new PVector(0, 0, 1), 60, color(0, 0, 255), 3);
+    Axis axis1 = new Axis(new PVector(0, 0, 0), new PVector(1, 0, 0), 40, color(255, 0, 0), 10);
+    Axis axis2 = new Axis(new PVector(0, 0, 0), new PVector(0, 1, 0), 60, color(0, 255, 0), 20);
+    Axis axis3 = new Axis(new PVector(0, 0, 0), new PVector(0, 0, 1), 60, color(0, 0, 255), 3);
 
 
     this.axes.add(axis1);

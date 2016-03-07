@@ -13,10 +13,6 @@ DropdownList ddl;
 
 PeasyCam cam;
 
-Axis axis1;
-Axis axis2;
-Axis axis3;
-
 Scene scene;
 
 ArrayList<DataBindingSchema> schemas;
