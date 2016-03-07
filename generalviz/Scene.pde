@@ -44,5 +44,9 @@ class Scene {
     this.axes.add(axis2);
     this.axes.add(axis3);
   }
+  
+  void remove_axes() {
+    this.axes.clear();
+  }
 }
 

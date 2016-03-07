@@ -147,7 +147,6 @@ public class ControlFrame extends PApplet {
     }
   }
 
-
   public ControlP5 control() {
     return cp5;
   }
