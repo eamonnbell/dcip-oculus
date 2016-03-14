@@ -42,6 +42,31 @@ class DataBinding {
     }
 
 
+    // Location sorting procedures
+
+
+    ArrayList<Float> sort_data = new ArrayList<Float>();
+
+    for (int i = 0; i < data_handler.table.getRowCount (); i++) {
+      TableRow row = data_handler.table.getRow(i);
+
+      sort_data.add(row.getFloat(data_binding_schema.get("size")));
+    }
+
+    Float[] countries = sort_data.toArray(new Float[sort_data.size()]);
+    ArrayIndexComparator comparator = new ArrayIndexComparator(countries);
+    Integer[] indexes = comparator.createIndexArray();
+    Arrays.sort(indexes, comparator);
+    println(indexes);
+
+    PVector[] locations = new PVector[indexes.length];
+    PVector offset = new PVector(10, 0, 0);
+    PVector current = new PVector(0, 0, 0);
+
+    for (int i = 0; i < indexes.length; i++) {
+      locations[indexes[i]] = PVector.add(current, (PVector.mult(offset, i)));
+    }
+
     for (int i = 0; i < data_handler.table.getRowCount (); i++) {
       TableRow row = data_handler.table.getRow(i);
 
@@ -55,7 +80,7 @@ class DataBinding {
       Primitive p = pf.get();
 
       p.setSize(primitive_size);
-      p.randomLocation();
+      p.move_to(locations[i]);
 
       int fill_color;
 
@@ -81,13 +106,13 @@ class DataBinding {
 
     for (int i = 0; i < data_handler.table.getRowCount (); i++) {
       TableRow row = data_handler.table.getRow(i);
-      
+
       String col_name = data_binding_schema.get("fill_color");
       String obs = row.getString(col_name);
-      
+
       Palette p = new Palette(3);
       Integer[] pal = p.pal.toArray(new Integer[0]);
-      
+
       if (color_map.containsKey(obs)) {
         // don't do anything
       } else {
@@ -121,8 +146,8 @@ class DataBinding {
 
       float obs = row.getFloat(data_binding_schema.get("fill_color"));
 
-      color LERP_FROM = color(0, 0, 0);
-      color LERP_TO = color(255, 255, 255);
+      color LERP_FROM = color(255, 0, 0);
+      color LERP_TO = color(0, 255, 255);
 
       if (color_map.containsKey(obs)) {
         // don't do anything
@@ -147,10 +172,36 @@ class DataBinding {
       Boolean test = column_titles.contains(data_binding_schema.get(aesthetics[i]));
       tests.add(test);
     }
-    
+
     if (tests.contains(false)) {
       throw new InvalidDataBindingException("Validation test failed.");
     }
+  }
+}
+
+public class ArrayIndexComparator implements Comparator<Integer> {
+  private final Float[] array;
+
+  public ArrayIndexComparator(Float[] array)
+  {
+    this.array = array;
+  }
+
+  public Integer[] createIndexArray()
+  {
+    Integer[] indexes = new Integer[array.length];
+    for (int i = 0; i < array.length; i++)
+    {
+      indexes[i] = i; // Autoboxing
+    }
+    return indexes;
+  }
+
+  @Override
+    public int compare(Integer index1, Integer index2)
+  {
+    // Autounbox from Integer to int to use as array indexes
+    return array[index1].compareTo(array[index2]);
   }
 }
 
