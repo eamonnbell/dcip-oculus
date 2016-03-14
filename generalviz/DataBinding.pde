@@ -43,8 +43,6 @@ class DataBinding {
 
 
     // Location sorting procedures
-
-
     ArrayList<Float> sort_data = new ArrayList<Float>();
 
     for (int i = 0; i < data_handler.table.getRowCount (); i++) {
