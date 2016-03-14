@@ -45,9 +45,6 @@ class DataBinding {
     for (int i = 0; i < data_handler.table.getRowCount (); i++) {
       TableRow row = data_handler.table.getRow(i);
 
-      PVector rand_loc = PVector.random3D();  
-      rand_loc.mult(100);
-
       color rand_color = color(random(255), random(255), random(255));
 
       int primitive_size = row.getInt(data_binding_schema.get("size"));
@@ -58,7 +55,7 @@ class DataBinding {
       Primitive p = pf.get();
 
       p.setSize(primitive_size);
-      p.setLocation(rand_loc);
+      p.randomLocation();
 
       int fill_color;
 

@@ -20,7 +20,7 @@ DataHandler data_handler;
 DataBinding data_binding;
 
 void setup() {
-  size( 320, 320, OPENGL );
+  size( 640, 640, OPENGL );
 
   data_handler = new DataHandler("testdata.csv");
  
@@ -95,7 +95,19 @@ void switchAxes() {
   }
 }
 
+void randomPositions() {
+  for (PrimitiveGroup p_g : scene.primitive_groups) {
+      for (Primitive p: p_g.primitives ) {
+        p.randomLocation();
+      };
+    }
+}
+
+
+////////////////////////
 // ControlP5 stuff here
+//
+
 
 ControlFrame addControlFrame(String theName, int theWidth, int theHeight, ArrayList<DataBindingSchema> theSchemas) {
   Frame f = new Frame(theName);
@@ -129,7 +141,8 @@ public class ControlFrame extends PApplet {
       ddl.addItem(schemas.get(i).get("name"), i);
     }
     
-    cp5.addButton("toggleAxes").setPosition(10, 10).setSize(100, 13);
+    cp5.addButton("doSwitchAxes").setPosition(10, 10).setSize(100, 13);
+    cp5.addButton("doRandomPositions").setPosition(10, 25).setSize(100, 13);
   }
 
   public void draw() {
@@ -147,13 +160,18 @@ public class ControlFrame extends PApplet {
   }
   
   public void activeDataBinding(int theValue) {
+    
     if (theValue < schemas.size()) {
         switchDataBindingSchema(schemas.get(theValue));
       };
   }
   
-  public void toggleAxes(int theValue) {
+  public void doSwitchAxes(int theValue) {
     switchAxes();
+  }
+  
+  public void doRandomPositions(int theValue) {
+    randomPositions();
   }
 
   public ControlP5 control() {

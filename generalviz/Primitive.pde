@@ -33,8 +33,18 @@ class Primitive {
     this.location = location_;
   }
   
+  void setTargetLocation(PVector target_location_) {
+    this.location = target_location_;
+  }
+  
   void setColor(color fill_color_) {
     this.fill_color = fill_color_;
+  }
+  
+  void randomLocation() {
+    PVector rand_loc = PVector.random3D();  
+    rand_loc.mult(100);
+    move_to(rand_loc);
   }
 
   void move_to(PVector target) {
