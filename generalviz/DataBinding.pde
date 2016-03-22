@@ -55,7 +55,6 @@ class DataBinding {
     ArrayIndexComparator comparator = new ArrayIndexComparator(countries);
     Integer[] indexes = comparator.createIndexArray();
     Arrays.sort(indexes, comparator);
-    println(indexes);
 
     PVector[] locations = new PVector[indexes.length];
     PVector offset = new PVector(30, 0, 0);

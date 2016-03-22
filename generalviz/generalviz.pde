@@ -74,7 +74,6 @@ void addDataBindingSchemas() {
     
     if (path.toLowerCase().endsWith(".yaml")) {
       DataBindingSchema dbs = new DataBindingSchema(path);
-      println(path);
       schemas.add(dbs);
     }
    }
