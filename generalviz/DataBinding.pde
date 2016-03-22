@@ -58,7 +58,7 @@ class DataBinding {
     println(indexes);
 
     PVector[] locations = new PVector[indexes.length];
-    PVector offset = new PVector(10, 0, 0);
+    PVector offset = new PVector(30, 0, 0);
     PVector current = new PVector(0, 0, 0);
 
     for (int i = 0; i < indexes.length; i++) {

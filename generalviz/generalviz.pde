@@ -43,7 +43,7 @@ void setup() {
 
   cam = new PeasyCam(this, 100);
   cam.setMinimumDistance(50);
-  cam.setMaximumDistance(500);
+  cam.setMaximumDistance(1000);
 
   scene = new Scene(true);
 
