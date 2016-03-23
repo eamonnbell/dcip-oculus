@@ -43,25 +43,45 @@ class DataBinding {
 
 
     // Location sorting procedures
-    ArrayList<Float> sort_data = new ArrayList<Float>();
+    ArrayList<Float> x_sort_data = new ArrayList<Float>();
+    ArrayList<Float> y_sort_data = new ArrayList<Float>();
 
     for (int i = 0; i < data_handler.table.getRowCount (); i++) {
       TableRow row = data_handler.table.getRow(i);
 
-      sort_data.add(row.getFloat(data_binding_schema.get("size")));
+      x_sort_data.add(row.getFloat(data_binding_schema.get("size")));
+      y_sort_data.add(row.getFloat(data_binding_schema.get("size")));
+
     }
 
-    Float[] countries = sort_data.toArray(new Float[sort_data.size()]);
-    ArrayIndexComparator comparator = new ArrayIndexComparator(countries);
-    Integer[] indexes = comparator.createIndexArray();
-    Arrays.sort(indexes, comparator);
+    Float[] x_sort = x_sort_data.toArray(new Float[x_sort_data.size()]);
+    ArrayIndexComparator x_comparator = new ArrayIndexComparator(x_sort);
+    Integer[] x_indexes = x_comparator.createIndexArray();
+    Arrays.sort(x_indexes, x_comparator);
+    
+    Float[] y_sort = y_sort_data.toArray(new Float[y_sort_data.size()]);
+    ArrayIndexComparator y_comparator = new ArrayIndexComparator(y_sort);
+    Integer[] y_indexes = y_comparator.createIndexArray();
+    Arrays.sort(y_indexes, y_comparator);
 
-    PVector[] locations = new PVector[indexes.length];
-    PVector offset = new PVector(30, 0, 0);
-    PVector current = new PVector(0, 0, 0);
+    PVector[] locations = new PVector[x_indexes.length];
+    
+    for (int i = 0; i < locations.length; i++) {
+      locations[i] = new PVector(0, 0, 0);
+    }
+    
+    PVector x_offset = new PVector(300, 0, 0);
+    PVector y_offset = new PVector(0, 300, 0);
+    PVector z_offset = new PVector(0, 0, 300);
 
-    for (int i = 0; i < indexes.length; i++) {
-      locations[indexes[i]] = PVector.add(current, (PVector.mult(offset, i)));
+    for (int i = 0; i < locations.length; i++) {
+      PVector x_old = locations[x_indexes[i]].get();
+      locations[x_indexes[i]] = PVector.add(x_old, x_offset);
+    }
+    
+    for (int i = 0; i < locations.length; i++) {
+      PVector y_old = locations[y_indexes[i]].get();
+      locations[y_indexes[i]] = PVector.add(y_old, y_offset);
     }
 
     for (int i = 0; i < data_handler.table.getRowCount (); i++) {
