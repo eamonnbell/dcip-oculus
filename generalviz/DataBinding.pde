@@ -45,12 +45,15 @@ class DataBinding {
     // Location sorting procedures
     ArrayList<Float> x_sort_data = new ArrayList<Float>();
     ArrayList<Float> y_sort_data = new ArrayList<Float>();
+    ArrayList<Float> z_sort_data = new ArrayList<Float>();
+
 
     for (int i = 0; i < data_handler.table.getRowCount (); i++) {
       TableRow row = data_handler.table.getRow(i);
 
       x_sort_data.add(row.getFloat(data_binding_schema.get("size")));
       y_sort_data.add(row.getFloat(data_binding_schema.get("size")));
+      z_sort_data.add(row.getFloat(data_binding_schema.get("size")));
 
     }
 
@@ -63,6 +66,11 @@ class DataBinding {
     ArrayIndexComparator y_comparator = new ArrayIndexComparator(y_sort);
     Integer[] y_indexes = y_comparator.createIndexArray();
     Arrays.sort(y_indexes, y_comparator);
+    
+    Float[] z_sort = z_sort_data.toArray(new Float[z_sort_data.size()]);
+    ArrayIndexComparator z_comparator = new ArrayIndexComparator(z_sort);
+    Integer[] z_indexes = z_comparator.createIndexArray();
+    Arrays.sort(z_indexes, z_comparator);
 
     PVector[] locations = new PVector[x_indexes.length];
     
@@ -82,6 +90,11 @@ class DataBinding {
     for (int i = 0; i < locations.length; i++) {
       PVector y_old = locations[y_indexes[i]].get();
       locations[y_indexes[i]] = PVector.add(y_old, PVector.mult(y_offset, i));
+    }
+    
+    for (int i = 0; i < locations.length; i++) {
+      PVector z_old = locations[z_indexes[i]].get();
+      locations[z_indexes[i]] = PVector.add(z_old, PVector.mult(z_offset, i));
     }
 
     for (int i = 0; i < data_handler.table.getRowCount (); i++) {
