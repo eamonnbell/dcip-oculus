@@ -70,18 +70,18 @@ class DataBinding {
       locations[i] = new PVector(0, 0, 0);
     }
     
-    PVector x_offset = new PVector(300, 0, 0);
-    PVector y_offset = new PVector(0, 300, 0);
-    PVector z_offset = new PVector(0, 0, 300);
+    PVector x_offset = new PVector(30, 0, 0);
+    PVector y_offset = new PVector(0, 30, 0);
+    PVector z_offset = new PVector(0, 0, 30);
 
     for (int i = 0; i < locations.length; i++) {
       PVector x_old = locations[x_indexes[i]].get();
-      locations[x_indexes[i]] = PVector.add(x_old, x_offset);
+      locations[x_indexes[i]] = PVector.add(x_old, PVector.mult(x_offset, i));
     }
     
     for (int i = 0; i < locations.length; i++) {
       PVector y_old = locations[y_indexes[i]].get();
-      locations[y_indexes[i]] = PVector.add(y_old, y_offset);
+      locations[y_indexes[i]] = PVector.add(y_old, PVector.mult(y_offset, i));
     }
 
     for (int i = 0; i < data_handler.table.getRowCount (); i++) {
