@@ -141,12 +141,6 @@ public class ControlFrame extends PApplet {
     frameRate(25);
     cp5 = new ControlP5(this);
 
-    DropdownList ddl = cp5.addDropdownList("activeDataBinding").setPosition(10, 40);
-
-    for (int i = 0; i < schemas.size (); i++) {
-      ddl.addItem(schemas.get(i).get("name"), i);
-    }
-
     cp5.addButton("doSwitchAxes").setPosition(10, 10).setSize(100, 13);
     cp5.addButton("doRandomPositions").setPosition(10, 25).setSize(100, 13);
   }
@@ -164,14 +158,7 @@ public class ControlFrame extends PApplet {
     h = theHeight;
     schemas = theSchemas;
   }
-
-  public void activeDataBinding(int theValue) {
-
-    if (theValue < schemas.size()) {
-      switchDataBindingSchema(schemas.get(theValue));
-    };
-  }
-
+  
   public void doSwitchAxes(int theValue) {
     switchAxes();
   }
