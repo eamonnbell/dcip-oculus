@@ -23,20 +23,20 @@ void setup() {
   size( 640, 640, OPENGL );
 
   data_handler = new DataHandler("testdata.csv");
- 
+
   File dir = new File(dataPath(""));
   File[] files = dir.listFiles();
-  
+
   schemas = new ArrayList<DataBindingSchema>();
 
-  for(int i = 0; i < files.length; i++) {
+  for (int i = 0; i < files.length; i++) {
     String path = files[i].getAbsolutePath();
-    
+
     if (path.toLowerCase().endsWith(".yaml")) {
       DataBindingSchema dbs = new DataBindingSchema(path);
       schemas.add(dbs);
     }
-   }
+  }
 
   cp5 = new ControlP5(this);
   cf = addControlFrame("Scene Control", 120, 150, schemas);
@@ -47,8 +47,7 @@ void setup() {
 
   scene = new Scene(true);
 
-
-  data_binding = new DataBinding(data_handler, schemas.get(0));
+  data_binding = new DataBinding(data_handler, schemas.get(1));
   scene.primitive_groups.add(data_binding.bind());
 
   noStroke();
@@ -66,17 +65,17 @@ void draw() {
 void addDataBindingSchemas() {
   File dir = new File(dataPath(""));
   File[] files = dir.listFiles();
-  
+
   schemas = new ArrayList<DataBindingSchema>();
 
-  for(int i = 0; i < files.length; i++) {
+  for (int i = 0; i < files.length; i++) {
     String path = files[i].getAbsolutePath();
-    
+
     if (path.toLowerCase().endsWith(".yaml")) {
       DataBindingSchema dbs = new DataBindingSchema(path);
       schemas.add(dbs);
     }
-   }
+  }
 }
 
 void switchDataBindingSchema(DataBindingSchema s) {
@@ -85,21 +84,29 @@ void switchDataBindingSchema(DataBindingSchema s) {
   scene.primitive_groups.add(data_binding.bind());
 }
 
+void keyPressed() {
+  if (key == '0') {
+    switchDataBindingSchema(schemas.get(0));
+  } else if (key == '1') {
+    switchDataBindingSchema(schemas.get(1));
+  }
+}
+
+
 void switchAxes() {
   if (scene.axes.size() > 0) {
     scene.remove_axes();
-  }
-  else {
+  } else {
     scene.add_axes();
   }
 }
 
 void randomPositions() {
   for (PrimitiveGroup p_g : scene.primitive_groups) {
-      for (Primitive p: p_g.primitives ) {
-        p.randomLocation();
-      };
-    }
+    for (Primitive p : p_g.primitives ) {
+      p.randomLocation();
+    };
+  }
 }
 
 
@@ -133,13 +140,13 @@ public class ControlFrame extends PApplet {
     size(w, h);
     frameRate(25);
     cp5 = new ControlP5(this);
-    
+
     DropdownList ddl = cp5.addDropdownList("activeDataBinding").setPosition(10, 40);
-    
+
     for (int i = 0; i < schemas.size (); i++) {
       ddl.addItem(schemas.get(i).get("name"), i);
     }
-    
+
     cp5.addButton("doSwitchAxes").setPosition(10, 10).setSize(100, 13);
     cp5.addButton("doRandomPositions").setPosition(10, 25).setSize(100, 13);
   }
@@ -157,18 +164,18 @@ public class ControlFrame extends PApplet {
     h = theHeight;
     schemas = theSchemas;
   }
-  
+
   public void activeDataBinding(int theValue) {
-    
+
     if (theValue < schemas.size()) {
-        switchDataBindingSchema(schemas.get(theValue));
-      };
+      switchDataBindingSchema(schemas.get(theValue));
+    };
   }
-  
+
   public void doSwitchAxes(int theValue) {
     switchAxes();
   }
-  
+
   public void doRandomPositions(int theValue) {
     randomPositions();
   }
