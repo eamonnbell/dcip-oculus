@@ -29,7 +29,6 @@ class VRListener {
 
     // Draw a red sphere representing the location of the listener
     PVector l = location.get();
-    l.add(new PVector(width/2, height/2, 0));
     translate(l.x, l.y, l.z);   
     fill(200, 15, 15);
     sphere(20);
