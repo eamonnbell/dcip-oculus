@@ -1,16 +1,7 @@
 import peasy.*;
-
-import java.awt.Frame;
-import java.awt.BorderLayout;
 import java.io.File;
 
-import controlP5.*;
-
-private ControlP5 cp5;
-
-ControlFrame cf;
-
-PeasyCam cam;
+OculusRift oculus;
 
 Scene scene;
 
@@ -19,8 +10,16 @@ ArrayList<DataBindingSchema> schemas;
 DataHandler data_handler;
 DataBinding data_binding;
 
+boolean isFullScreen = false;
+
+boolean sketchFullScreen() {
+  return isFullScreen;
+}
+
 void setup() {
-  size( 640, 640, OPENGL );
+  size( 1920, 1080, P3D );
+  
+  oculus = new OculusRift(this);
 
   data_handler = new DataHandler("testdata.csv");
 
@@ -38,13 +37,6 @@ void setup() {
     }
   }
 
-  cp5 = new ControlP5(this);
-  cf = addControlFrame("Scene Control", 120, 150, schemas);
-
-  cam = new PeasyCam(this, 100);
-  cam.setMinimumDistance(50);
-  cam.setMaximumDistance(1000);
-
   scene = new Scene(true);
 
   data_binding = new DataBinding(data_handler, schemas.get(1));
@@ -54,6 +46,10 @@ void setup() {
 }
 
 void draw() {
+  oculus.draw();
+}
+
+void onDrawScene(int eye) {
   lights();
   background(10);
   fill(255);
@@ -89,6 +85,10 @@ void keyPressed() {
     switchDataBindingSchema(schemas.get(0));
   } else if (key == '1') {
     switchDataBindingSchema(schemas.get(1));
+  } else if (key == 'r') {
+    randomPositions();
+  } else if (key == 'a') {
+    switchAxes();
   }
 }
 
@@ -109,70 +109,4 @@ void randomPositions() {
   }
 }
 
-
-////////////////////////
-// ControlP5 stuff here
-//
-
-
-ControlFrame addControlFrame(String theName, int theWidth, int theHeight, ArrayList<DataBindingSchema> theSchemas) {
-  Frame f = new Frame(theName);
-  ControlFrame p = new ControlFrame(this, theWidth, theHeight, theSchemas);
-  f.add(p);
-  p.init();
-  f.setTitle(theName);
-  f.setSize(p.w, p.h);
-  f.setLocation(100, 100);
-  f.setResizable(false);
-  f.setVisible(true);
-  return p;
-}
-
-public class ControlFrame extends PApplet {
-
-  int w, h;
-  ArrayList<DataBindingSchema> schemas;
-
-
-  int abc = 100;
-
-  public void setup() {
-    size(w, h);
-    frameRate(25);
-    cp5 = new ControlP5(this);
-
-    cp5.addButton("doSwitchAxes").setPosition(10, 10).setSize(100, 13);
-    cp5.addButton("doRandomPositions").setPosition(10, 25).setSize(100, 13);
-  }
-
-  public void draw() {
-    background(abc);
-  }
-
-  private ControlFrame() {
-  }
-
-  public ControlFrame(Object theParent, int theWidth, int theHeight, ArrayList<DataBindingSchema> theSchemas) {
-    parent = theParent;
-    w = theWidth;
-    h = theHeight;
-    schemas = theSchemas;
-  }
-  
-  public void doSwitchAxes(int theValue) {
-    switchAxes();
-  }
-
-  public void doRandomPositions(int theValue) {
-    randomPositions();
-  }
-
-  public ControlP5 control() {
-    return cp5;
-  }
-
-  ControlP5 cp5;
-
-  Object parent;
-}
 
