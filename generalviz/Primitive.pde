@@ -132,6 +132,7 @@ class PrimitiveTeapot extends Primitive {
   
   PrimitiveTeapot() {
     obj = loadShape("data/teapot.obj");
+    obj.scale(0.3);
   }
 
   void display() {
