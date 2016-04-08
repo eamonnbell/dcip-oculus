@@ -123,12 +123,15 @@ class PrimitiveCube extends Primitive {
   }
 }
 
-class PrimitiveSpike extends Primitive {
-  PrimitiveSpike(PVector location_, int size_, color fill_color_) {
+class PrimitiveTeapot extends Primitive {
+  PShape obj;
+  
+  PrimitiveTeapot(PVector location_, int size_, color fill_color_) {
     super(location_, size_, fill_color_);
   }
   
-  PrimitiveSpike() {
+  PrimitiveTeapot() {
+    obj = loadShape("data/teapot.obj");
   }
 
   void display() {
@@ -141,21 +144,7 @@ class PrimitiveSpike extends Primitive {
     translate(l.x, l.y, l.z);
 
     fill(fill_color);
-    box(size);
-
-    pushMatrix();
-
-    rotateX(PI/4);
-    rotateY(PI/6);
-    rotateZ(PI/8);
-
-    fill(fill_color);
-    box(size);
-
-    popMatrix();
-
-    fill(fill_color);
-    sphere(size * .75);
+    shape(obj);
 
 
     popMatrix();
@@ -175,7 +164,7 @@ class PrimitiveFactory {
       p = new PrimitiveCube();
       break;
     case 2: 
-      p = new PrimitiveSpike();
+      p = new PrimitiveTeapot();
       break;
     }
   }

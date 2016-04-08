@@ -1,4 +1,3 @@
-import peasy.*;
 import java.io.File;
 
 OculusRift oculus;
