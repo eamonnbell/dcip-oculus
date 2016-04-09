@@ -18,9 +18,6 @@ boolean sketchFullScreen() {
 
 void setup() {
   size( 1920, 1080, OPENGL );
-  
-  textMode(MODEL);
-
 
   oculus = new OculusRift(this);
   position = new PVector( 0, 0, 0); 

@@ -1,14 +1,17 @@
 class HUD {
-
+  PFont f;
   HUD() {
   }
 
   void display() {    
-    fill(240, 240, 240);
-
-    rotateX(PI * 0.5);
-    rotateY(PI * 0.3);
-    text("test", 10, 10, 10);
+    hint(DISABLE_DEPTH_TEST);
+    pushMatrix();
+    resetMatrix();
+    fill(230, 45, 45);
+    translate( -50, 50, -100 );
+    ellipse( 0, 0, 50, 50 );
+    popMatrix();
+    hint(ENABLE_DEPTH_TEST);
   }
 }
 
