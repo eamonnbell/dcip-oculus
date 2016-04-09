@@ -2,7 +2,7 @@ class Scene {
 
   ArrayList<PrimitiveGroup> primitive_groups = new ArrayList<PrimitiveGroup>();
   ArrayList<Axis> axes = new ArrayList<Axis>();
-    
+  HUD hud = new HUD();
 
   Scene(boolean draw_axes_) {
     if (draw_axes_) {
@@ -27,8 +27,10 @@ class Scene {
     for (Axis a : axes) {
       a.display();
     }
+
+    hud.display();
   }
-  
+
   void clear_scene() {
     for (PrimitiveGroup p_g : primitive_groups) {
       p_g.depopulate();
@@ -45,7 +47,7 @@ class Scene {
     this.axes.add(axis2);
     this.axes.add(axis3);
   }
-  
+
   void remove_axes() {
     this.axes.clear();
   }
