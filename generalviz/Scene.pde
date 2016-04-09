@@ -1,7 +1,8 @@
 class Scene {
 
   ArrayList<PrimitiveGroup> primitive_groups = new ArrayList<PrimitiveGroup>();
-  ArrayList<Axis> axes = new ArrayList<Axis>();  
+  ArrayList<Axis> axes = new ArrayList<Axis>();
+    
 
   Scene(boolean draw_axes_) {
     if (draw_axes_) {

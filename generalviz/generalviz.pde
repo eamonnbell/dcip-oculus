@@ -1,6 +1,7 @@
 import java.io.File;
 
 OculusRift oculus;
+PVector position;
 
 Scene scene;
 
@@ -17,8 +18,9 @@ boolean sketchFullScreen() {
 
 void setup() {
   size( 1920, 1080, P3D );
-  
+
   oculus = new OculusRift(this);
+  position = new PVector( 0, 0, 0); 
 
   data_handler = new DataHandler("testdata.csv");
 
@@ -52,6 +54,8 @@ void onDrawScene(int eye) {
   lights();
   background(10);
   fill(255);
+  
+  translate( position.x, position.y, position.z  );
 
   scene.update();
   scene.display();
@@ -82,12 +86,37 @@ void switchDataBindingSchema(DataBindingSchema s) {
 void keyPressed() {
   if (key == '0') {
     switchDataBindingSchema(schemas.get(0));
-  } else if (key == '1') {
+  }
+
+  if (key == '1') {
     switchDataBindingSchema(schemas.get(1));
-  } else if (key == 'r') {
+  } 
+
+  if (key == 'r') {
     randomPositions();
-  } else if (key == 'a') {
+  } 
+  if (key == 'a') {
     switchAxes();
+  } 
+
+  if (key==' ') {
+    oculus.resetHeadState();
+  }
+
+  if (keyCode==LEFT) {
+    position.x += 20;
+  }
+
+  if (keyCode==RIGHT) {
+    position.x -= 20;
+  }
+
+  if (keyCode==UP) {
+    position.z += 20;
+  }
+
+  if (keyCode==DOWN) {
+    position.z -= 20;
   }
 }
 
@@ -107,5 +136,4 @@ void randomPositions() {
     };
   }
 }
-
 
