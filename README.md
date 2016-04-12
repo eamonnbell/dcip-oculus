@@ -3,7 +3,7 @@ Code for DCIP internship with Processing, Oculus and 3D audio
 
 ## License
 
-dcip-oculus is licensed under the MIT License. See LICENSE.md for more details.
+dcip-oculus is licensed under the MIT License. See LICENSE for more details.
 
 dcip-oculus uses the following contributed code, which have their own respective licenses.
 
