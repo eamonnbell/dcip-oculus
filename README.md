@@ -5,13 +5,18 @@ Code for DCIP internship with Processing, Oculus and 3D audio
 
 dcip-oculus is licensed under the MIT License. See LICENSE.md for more details.
 
-dcip-oculus uses the following contributed code:
+dcip-oculus uses the following contributed code, which have their own respective licenses.
 
-- OculusRiftP5
-- JOculus
-- jna
-- jovr
-- yamlbeans
+Located in OculusRift.pde in each sketch:
+
+- [OculusRiftP5](https://github.com/kougaku/OculusRiftP5)
+
+
+Located in the code/ subfolder in each sketch:
+
+- [jna](https://github.com/java-native-access/jna) [(LGPL)](https://github.com/java-native-access/jna#license)
+- [jovr](https://github.com/jherico/jovr) 
+- [yamlbeans](https://github.com/EsotericSoftware/yamlbeans) [(MIT)](https://github.com/EsotericSoftware/yamlbeans/blob/master/LICENSE)
 
 ## blobviz
 
