@@ -50,6 +50,7 @@ void draw() {
   oculus.draw();
 }
 
+
 void onDrawScene(int eye) {
   lights();
   background(10);

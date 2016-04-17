@@ -9,7 +9,7 @@ class HUD {
     resetMatrix();
     fill(230, 45, 45);
     translate( -50, 50, -100 );
-    ellipse( 0, 0, 50, 50 );
+    ellipse( 0, 0, 20, 20 );
     popMatrix();
     hint(ENABLE_DEPTH_TEST);
   }
