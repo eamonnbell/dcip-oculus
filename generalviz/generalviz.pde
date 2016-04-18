@@ -57,6 +57,11 @@ void onDrawScene(int eye) {
   fill(255);
   
   translate( position.x, position.y, position.z  );
+  
+  // stereoscopy happens here
+  if (eye == 1) {
+    translate( 10, 0, 0);
+  }
 
   scene.update();
   scene.display();
