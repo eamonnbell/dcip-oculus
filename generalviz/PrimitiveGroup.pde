@@ -19,7 +19,9 @@ class PrimitiveGroup {
   void display() {
     // Display every Primitive in the PrimitiveGroup
     for (Primitive p : primitives) {
+      pushMatrix();
       p.display();
+      popMatrix();
     }
   }
 

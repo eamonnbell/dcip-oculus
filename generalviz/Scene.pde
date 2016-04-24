@@ -20,12 +20,16 @@ class Scene {
   void display() {
     // Display every PrimitiveGroup in the Scene
     for (PrimitiveGroup p_g : primitive_groups) {
+      pushMatrix();
       p_g.display();
+      popMatrix();
     }
 
     // Display every Axis in the Scene
     for (Axis a : axes) {
+      pushMatrix();
       a.display();
+      popMatrix();
     }
 
     // hud.display();

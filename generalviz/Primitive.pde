@@ -89,14 +89,11 @@ class PrimitiveSphere extends Primitive {
 
     fill(fill_color);
 
-    pushMatrix();
-
     PVector l = location.get();
     translate(l.x, l.y, l.z);
 
     sphere(size);
 
-    popMatrix();
   }
 }
 
@@ -112,14 +109,12 @@ class PrimitiveCube extends Primitive {
 
     fill(fill_color);
 
-    pushMatrix();
 
     PVector l = location.get();
     translate(l.x, l.y, l.z);
 
     box(size);
 
-    popMatrix();
   }
 }
 
@@ -140,7 +135,6 @@ class PrimitiveTeapot extends Primitive {
 
     fill(fill_color);
 
-    pushMatrix();
 
     PVector l = location.get();
     translate(l.x, l.y, l.z);
@@ -148,8 +142,6 @@ class PrimitiveTeapot extends Primitive {
     fill(fill_color);
     shape(obj);
 
-
-    popMatrix();
   }
 }
 
