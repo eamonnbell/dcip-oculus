@@ -20,6 +20,8 @@ void setup() {
   size( 1920, 1080, OPENGL );
 
   oculus = new OculusRift(this);
+  oculus.enableHeadTracking();
+  
   position = new PVector( 0, 0, 0); 
 
   data_handler = new DataHandler("testdata.csv");
