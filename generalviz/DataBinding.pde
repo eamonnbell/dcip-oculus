@@ -109,7 +109,7 @@ class DataBinding {
       PrimitiveFactory pf = new PrimitiveFactory(primitive_type);
       Primitive p = pf.get();
 
-      p.setSize(primitive_size * 100);
+      p.setSize(primitive_size);
       p.move_to(locations[i]);
 
       int fill_color;
