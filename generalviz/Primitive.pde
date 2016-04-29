@@ -43,7 +43,7 @@ class Primitive {
   
   void randomLocation() {
     PVector rand_loc = PVector.random3D();  
-    rand_loc.mult(100);
+    rand_loc.mult(1000);
     move_to(rand_loc);
   }
 
@@ -127,7 +127,7 @@ class PrimitiveTeapot extends Primitive {
   
   PrimitiveTeapot() {
     obj = loadShape("data/teapot.obj");
-    obj.scale(0.3);
+    obj.scale(3);
     obj.rotateX(PI);
   }
 
