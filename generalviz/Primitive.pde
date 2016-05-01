@@ -59,11 +59,13 @@ class Primitive {
     
     sound.setVolume(10);
 
-    // Make sure the Music object takes absolution positions
+    // Make sure the Music object takes absolute positions
     sound.setRelativeToListener(false);
+    
+    sound.setAttenuation(95);
 
     // MinDistance is the maximum distance at which a sound is heard at its maximum volume
-    sound.setMinDistance(250);
+    sound.setMinDistance(1);
   }
   
   void play() {
@@ -99,8 +101,6 @@ class Primitive {
 
     PVector l = location.get();
     sound.setPosition(l.x, l.y, l.z);
-
-    l.add(new PVector(width/2, height/2, 0));
 
   }
 
