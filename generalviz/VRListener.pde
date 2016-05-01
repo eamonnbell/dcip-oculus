@@ -22,6 +22,7 @@ class VRListener {
 
     Listener.setPosition(location.x, location.y, location.z);
     Listener.setDirection(direction.x, direction.y, direction.z);
+    
   }
 
   void display() {
@@ -48,7 +49,10 @@ class VRListener {
   void update() {
     // Set the position and location of the listener to that of the VRListener
 
+    location = position;
+    
     Listener.setPosition(location.x, location.y, location.z);
     Listener.setDirection(direction.x, direction.y, direction.z);
+    
   }
 }  

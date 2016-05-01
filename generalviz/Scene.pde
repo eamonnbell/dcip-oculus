@@ -3,6 +3,7 @@ class Scene {
   ArrayList<PrimitiveGroup> primitive_groups = new ArrayList<PrimitiveGroup>();
   ArrayList<Axis> axes = new ArrayList<Axis>();
   // HUD hud = new HUD();
+  VRListener vr_listener = new VRListener(new PVector(0,0,0), new PVector(0,1,0));
 
   Scene(boolean draw_axes_) {
     if (draw_axes_) {
@@ -15,6 +16,8 @@ class Scene {
     for (PrimitiveGroup p_g : primitive_groups) {
       p_g.update();
     }
+    
+    vr_listener.update();
   }
   
   void play() {
