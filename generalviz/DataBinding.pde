@@ -111,7 +111,9 @@ class DataBinding {
 
       p.setSize(primitive_size);
       
-      p.setSoundFilename("data/song.wav");
+      String filename = row.getString("filename");
+      
+      p.setSoundFilename("data/" + filename);
       p.initializeSound();
       
       p.move_to(locations[i]);
