@@ -16,6 +16,12 @@ class Scene {
       p_g.update();
     }
   }
+  
+  void play() {
+    for (PrimitiveGroup p_g : primitive_groups) {
+      p_g.play();
+    }
+  }
 
   void display() {
     // Display every PrimitiveGroup in the Scene

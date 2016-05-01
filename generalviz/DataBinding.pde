@@ -110,6 +110,10 @@ class DataBinding {
       Primitive p = pf.get();
 
       p.setSize(primitive_size);
+      
+      p.setSoundFilename("data/song.wav");
+      p.initializeSound();
+      
       p.move_to(locations[i]);
 
       int fill_color;

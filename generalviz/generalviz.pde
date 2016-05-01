@@ -107,6 +107,10 @@ void keyPressed() {
     switchAxes();
   } 
 
+  if (key=='p') {
+    scene.play();
+  }
+
   if (key==' ') {
     oculus.resetHeadState();
   }

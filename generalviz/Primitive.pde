@@ -56,6 +56,8 @@ class Primitive {
       println("Unable to open music file.");
       println(e);
     }
+    
+    sound.setVolume(10);
 
     // Make sure the Music object takes absolution positions
     sound.setRelativeToListener(false);

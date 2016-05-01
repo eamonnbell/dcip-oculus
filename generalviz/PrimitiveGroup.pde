@@ -16,6 +16,12 @@ class PrimitiveGroup {
     }
   }
 
+  void play() {
+    for (Primitive p : primitives) {
+      p.play();
+    }
+  }
+
   void display() {
     // Display every Primitive in the PrimitiveGroup
     for (Primitive p : primitives) {
