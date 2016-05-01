@@ -98,9 +98,10 @@ class Primitive {
     }
 
     PVector l = location.get();
-    l.add(new PVector(width/2, height/2, 0));
-    
     sound.setPosition(l.x, l.y, l.z);
+
+    l.add(new PVector(width/2, height/2, 0));
+
   }
 
   void display() {
