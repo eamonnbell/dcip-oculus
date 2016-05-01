@@ -110,7 +110,7 @@ void keyPressed() {
   if (key=='p') {
     scene.play();
   }
-
+  
   if (key==' ') {
     if (oculus.isUsingHeadTracking) {
       oculus.resetHeadState();

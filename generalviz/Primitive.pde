@@ -82,7 +82,7 @@ class Primitive {
     velocity = PVector.sub(target_location, location);
 
     velocity.normalize();
-    velocity.mult(0.3);
+    velocity.mult(3);
   }
 
   void update() {
