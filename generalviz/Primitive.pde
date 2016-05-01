@@ -5,7 +5,7 @@ class Primitive {
 
   int size;
   color fill_color;
-  
+
   String filename;
   Music sound;
 
@@ -32,15 +32,42 @@ class Primitive {
   void setLocation(PVector location_) {
     this.location = location_;
   }
-  
+
   void setTargetLocation(PVector target_location_) {
     this.location = target_location_;
   }
-  
+
   void setColor(color fill_color_) {
     this.fill_color = fill_color_;
   }
+
+  void setSoundFilename(String filename_) {
+    this.filename = filename_;
+  }
+
+  void initializeSound() {
+    sound = new Music();
+    Path p = Paths.get(sketchPath(this.filename));
+
+    try {
+      sound.openFromFile(p);
+    } 
+    catch (Exception e) {
+      println("Unable to open music file.");
+      println(e);
+    }
+
+    // Make sure the Music object takes absolution positions
+    sound.setRelativeToListener(false);
+
+    // MinDistance is the maximum distance at which a sound is heard at its maximum volume
+    sound.setMinDistance(250);
+  }
   
+  void play() {
+    sound.play();
+  }
+
   void randomLocation() {
     PVector rand_loc = PVector.random3D();  
     rand_loc.mult(100);
@@ -93,7 +120,6 @@ class PrimitiveSphere extends Primitive {
     translate(l.x, l.y, l.z);
 
     sphere(size);
-
   }
 }
 
@@ -114,17 +140,16 @@ class PrimitiveCube extends Primitive {
     translate(l.x, l.y, l.z);
 
     box(size);
-
   }
 }
 
 class PrimitiveTeapot extends Primitive {
   PShape obj;
-  
+
   PrimitiveTeapot(PVector location_, int size_, color fill_color_) {
     super(location_, size_, fill_color_);
   }
-  
+
   PrimitiveTeapot() {
     obj = loadShape("data/teapot.obj");
     obj.scale(0.3);
@@ -141,7 +166,6 @@ class PrimitiveTeapot extends Primitive {
 
     fill(fill_color);
     shape(obj);
-
   }
 }
 
