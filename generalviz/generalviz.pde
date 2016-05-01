@@ -91,6 +91,14 @@ void switchDataBindingSchema(DataBindingSchema s) {
   scene.primitive_groups.add(data_binding.bind());
 }
 
+void mouseDragged() {
+  float x_scaled = map(mouseX, 0, height, -1, 1);
+  float y_scaled = map(mouseY, 0, width, -1, 1);
+  
+  scene.vr_listener.direction.x = x_scaled;
+  scene.vr_listener.direction.y = y_scaled;
+}
+
 void keyPressed() {
   if (key == '0') {
     switchDataBindingSchema(schemas.get(0));
@@ -103,12 +111,16 @@ void keyPressed() {
   if (key == 'r') {
     randomPositions();
   } 
-  if (key == 'a') {
+  if (key == 'x') {
     switchAxes();
   } 
 
   if (key=='p') {
     scene.play();
+  }
+  
+  if (key=='q') {
+    print_debug_info();
   }
   
   if (key==' ') {
@@ -117,6 +129,30 @@ void keyPressed() {
     } else {
       println("HMD is not using head tracking; resetting head state makes no sense.");
     }
+  }
+  
+  if (key=='a') {
+    scene.vr_listener.location.x += 20;
+  }
+
+  if (key=='d') {
+    scene.vr_listener.location.x -= 20;
+  }
+
+  if (key=='w') {
+    scene.vr_listener.location.z += 20;
+  }
+
+  if (key=='s') {
+    scene.vr_listener.location.z -= 20;
+  }
+  
+  if (key=='q') {
+    scene.vr_listener.location.y -= 20;
+  }
+  
+  if (key=='e') {
+    scene.vr_listener.location.y += 20;
   }
 
   if (keyCode==LEFT) {
@@ -134,6 +170,34 @@ void keyPressed() {
   if (keyCode==DOWN) {
     position.z -= 20;
   }
+  
+  
+}
+
+void print_debug_info() {
+  println("VR listener");
+  println("location field");
+  println(scene.vr_listener.location);
+  println("direction field");
+  println(scene.vr_listener.direction);
+  println("Listener position");
+  println(Listener.getPosition());
+  println("Listener direction");
+  println(Listener.getDirection());
+  
+  println("Primitives");
+  
+  for (PrimitiveGroup p_g : scene.primitive_groups) {
+    for (Primitive p : p_g.primitives) {
+      println("location field");
+      println(p.location);
+      println("SoundSource position");
+      println(p.sound.getPosition());
+      
+    }
+  }
+
+  
 }
 
 

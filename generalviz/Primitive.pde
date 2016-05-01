@@ -57,15 +57,15 @@ class Primitive {
       println(e);
     }
     
-    sound.setVolume(10);
+    sound.setVolume(25);
 
     // Make sure the Music object takes absolute positions
     sound.setRelativeToListener(false);
     
-    sound.setAttenuation(95);
+    sound.setAttenuation(2.5);
 
     // MinDistance is the maximum distance at which a sound is heard at its maximum volume
-    sound.setMinDistance(1);
+    sound.setMinDistance(10);
   }
   
   void play() {

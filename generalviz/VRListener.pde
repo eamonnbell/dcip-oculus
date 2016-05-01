@@ -28,11 +28,11 @@ class VRListener {
   void display() {
     pushMatrix();
 
-    // Draw a red sphere representing the location of the listener
-    PVector l = location.get();
-    translate(l.x, l.y, l.z);   
+    // Draw a red box representing the location of the listener
+    // PVector l = location.get();
+    translate(location.x, location.y, location.z);   
     fill(200, 15, 15);
-    sphere(20);
+    box(20);
     fill(255);
 
     // Draw a green line representing the orientation of the listener
@@ -47,9 +47,7 @@ class VRListener {
   }
 
   void update() {
-    // Set the position and location of the listener to that of the VRListener
-
-    location = position;
+    // Set the position and location of the listener to that of the camera
     
     Listener.setPosition(location.x, location.y, location.z);
     Listener.setDirection(direction.x, direction.y, direction.z);
