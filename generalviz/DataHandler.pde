@@ -7,6 +7,8 @@ class DataHandler {
     filename = filename_;
     table = loadTable(filename, "header");    
 
+    // Uses reflection to make the private columnTitles field readable
+    // for use in a DataBindingSchema validator later on
     try {
       java.lang.reflect.Field f = table.getClass().getDeclaredField("columnTitles");
       f.setAccessible(true);

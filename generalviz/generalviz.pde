@@ -112,7 +112,11 @@ void keyPressed() {
   }
 
   if (key==' ') {
-    oculus.resetHeadState();
+    if (oculus.isUsingHeadTracking) {
+      oculus.resetHeadState();
+    } else {
+      println("HMD is not using head tracking; resetting head state makes no sense.");
+    }
   }
 
   if (keyCode==LEFT) {
