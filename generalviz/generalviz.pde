@@ -21,7 +21,7 @@ void setup() {
 
   oculus = new OculusRift(this);
   oculus.enableHeadTracking();
-  
+
   position = new PVector( 0, 0, 0); 
 
   data_handler = new DataHandler("testdata.csv");
@@ -57,9 +57,9 @@ void onDrawScene(int eye) {
   lights();
   background(10);
   fill(255);
-  
+
   translate( position.x, position.y, position.z  );
-  
+
   // stereoscopy happens here
   if (eye == 1) {
     translate( 10, 0, 0);
@@ -94,17 +94,17 @@ void switchDataBindingSchema(DataBindingSchema s) {
 void mouseDragged() {
   float x_scaled = map(mouseX, 0, height, -1, 1);
   float y_scaled = map(mouseY, 0, width, -1, 1);
-  
+
   scene.vr_listener.direction.x = x_scaled;
   scene.vr_listener.direction.y = y_scaled;
 }
 
 void keyPressed() {
-  if (key == '0') {
+  if (key == '[') {
     switchDataBindingSchema(schemas.get(0));
   }
 
-  if (key == '1') {
+  if (key == ']') {
     switchDataBindingSchema(schemas.get(1));
   } 
 
@@ -118,11 +118,11 @@ void keyPressed() {
   if (key=='p') {
     scene.play();
   }
-  
+
   if (key=='q') {
     print_debug_info();
   }
-  
+
   if (key==' ') {
     if (oculus.isUsingHeadTracking) {
       oculus.resetHeadState();
@@ -130,7 +130,7 @@ void keyPressed() {
       println("HMD is not using head tracking; resetting head state makes no sense.");
     }
   }
-  
+
   if (key=='a') {
     scene.vr_listener.location.x += 20;
   }
@@ -146,14 +146,22 @@ void keyPressed() {
   if (key=='s') {
     scene.vr_listener.location.z -= 20;
   }
-  
+
   if (key=='q') {
     scene.vr_listener.location.y -= 20;
   }
-  
+
   if (key=='e') {
     scene.vr_listener.location.y += 20;
   }
+
+  if (Character.isDigit(key)) {
+    for (PrimitiveGroup p_g : scene.primitive_groups) {
+      Primitive p = p_g.primitives.get(int(key) - 49);
+      p.toggle();
+    }
+  }
+
 
   if (keyCode==LEFT) {
     position.x += 20;
@@ -170,8 +178,6 @@ void keyPressed() {
   if (keyCode==DOWN) {
     position.z -= 20;
   }
-  
-  
 }
 
 void print_debug_info() {
@@ -184,20 +190,17 @@ void print_debug_info() {
   println(Listener.getPosition());
   println("Listener direction");
   println(Listener.getDirection());
-  
+
   println("Primitives");
-  
+
   for (PrimitiveGroup p_g : scene.primitive_groups) {
     for (Primitive p : p_g.primitives) {
       println("location field");
       println(p.location);
       println("SoundSource position");
       println(p.sound.getPosition());
-      
     }
   }
-
-  
 }
 
 

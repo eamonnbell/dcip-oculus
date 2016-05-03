@@ -4,10 +4,14 @@ class Primitive {
   PVector target_location;
 
   int size;
+  
   color fill_color;
+  color old_color;
 
   String filename;
   Music sound;
+  
+  boolean selected;
 
   Primitive(PVector location_, int size_, color fill_color_) {
     // Primitives represent data binding and have location and size.
@@ -16,6 +20,7 @@ class Primitive {
     size = size_;
     fill_color = fill_color_;
     velocity = new PVector(0, 0, 0);
+    selected = false;
   }
 
   Primitive() {
@@ -43,6 +48,25 @@ class Primitive {
 
   void setSoundFilename(String filename_) {
     this.filename = filename_;
+  }
+  
+  void select() {
+    this.selected = true;
+    this.old_color = this.fill_color;
+    this.setColor(color(255,0,0));
+  }
+  
+  void deselect() {
+    this.selected = false;
+    this.setColor(this.old_color);
+  }
+  
+  void toggle() {
+    if (this.selected) {
+      this.deselect();
+    } else {
+      this.select();
+    }
   }
 
   void initializeSound() {
@@ -119,7 +143,7 @@ class PrimitiveSphere extends Primitive {
 
   void display() {
 
-    fill(fill_color);
+    fill(this.fill_color);
 
     PVector l = location.get();
     translate(l.x, l.y, l.z);
@@ -138,7 +162,7 @@ class PrimitiveCube extends Primitive {
 
   void display() {
 
-    fill(fill_color);
+    fill(this.fill_color);
 
 
     PVector l = location.get();
@@ -163,13 +187,10 @@ class PrimitiveTeapot extends Primitive {
 
   void display() {
 
-    fill(fill_color);
-
-
     PVector l = location.get();
     translate(l.x, l.y, l.z);
 
-    fill(fill_color);
+    fill(this.fill_color);
     shape(obj);
   }
 }
@@ -187,7 +208,7 @@ class PrimitiveFactory {
       p = new PrimitiveCube();
       break;
     case 2: 
-      p = new PrimitiveTeapot();
+      p = new PrimitiveSphere();
       break;
     }
   }
