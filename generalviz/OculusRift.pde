@@ -65,7 +65,7 @@ class OculusRift {
   private final float imageScaling  = 2.27;
   private final int   imageShiftX   = 437;
   private final int   imageCutWidth = 0;
-  private final float sensingScale  = 1000.0;  // for millimeter
+  private final float sensingScale  = 10.0;  // for decimeter
 
   private PApplet _parent;
   private PGraphics pg_backup;
