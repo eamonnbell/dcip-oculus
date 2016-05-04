@@ -10,7 +10,9 @@ ArrayList<DataBindingSchema> schemas;
 DataHandler data_handler;
 DataBinding data_binding;
 
-boolean isFullScreen = false;
+float ipd = 0.0;
+
+boolean isFullScreen = true;
 
 boolean sketchFullScreen() {
   return isFullScreen;
@@ -61,8 +63,8 @@ void onDrawScene(int eye) {
   translate( position.x, position.y, position.z  );
 
   // stereoscopy happens here
-  if (eye == 1) {
-    translate( 10, 0, 0);
+  if (eye == 37) {
+    translate( ipd, 0, 0);
   }
 
   scene.update();
@@ -106,7 +108,20 @@ void keyPressed() {
 
   if (key == ']') {
     switchDataBindingSchema(schemas.get(1));
-  } 
+  }
+
+  if (key == '<') {
+    ipd -= 1;
+    print("IPD is at: ");
+    println(ipd);
+  }
+
+  if (key == '>') {
+    ipd += 1;
+    print("IPD is at: ");
+    println(ipd);
+  }
+
 
   if (key == 'r') {
     randomPositions();
@@ -221,4 +236,3 @@ void randomPositions() {
     };
   }
 }
-
