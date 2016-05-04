@@ -53,11 +53,14 @@ class Primitive {
   void select() {
     this.selected = true;
     this.old_color = this.fill_color;
-    this.setColor(color(255,0,0));
+    
+    this.sound.setVolume(25);
+    this.setColor(color(0,255,0));
   }
   
   void deselect() {
     this.selected = false;
+    this.sound.setVolume(0);
     this.setColor(this.old_color);
   }
   
