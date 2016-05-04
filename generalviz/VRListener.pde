@@ -22,7 +22,6 @@ class VRListener {
 
     Listener.setPosition(location.x, location.y, location.z);
     Listener.setDirection(direction.x, direction.y, direction.z);
-    
   }
 
   void display() {
@@ -47,10 +46,28 @@ class VRListener {
   }
 
   void update() {
+
+    if (oculus.isUsingHeadTracking) {
+      // Get view matrix from Oculus rift
+      PMatrix3D view_matrix = oculus.getMatrix();
+
+      // Kill the terms in the outer columns
+      view_matrix.preApply(
+      1, 0, 0, 0, 
+      0, 1, 0, 0, 
+      0, 0, 1, 0, 
+      0, 0, 0, 0);
+
+      PVector original = new PVector(0, 0, -1);
+      PVector result = new PVector();
+      
+      view_matrix.mult(original, result);
+
+      direction = result;
+    } 
+
     // Set the position and location of the listener to that of the camera
-    
     Listener.setPosition(location.x, location.y, location.z);
     Listener.setDirection(direction.x, direction.y, direction.z);
-    
   }
-}  
+}
