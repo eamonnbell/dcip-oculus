@@ -119,7 +119,7 @@ void keyPressed() {
     scene.play();
   }
 
-  if (key=='q') {
+  if (key=='?') {
     print_debug_info();
   }
 
@@ -157,8 +157,10 @@ void keyPressed() {
 
   if (Character.isDigit(key)) {
     for (PrimitiveGroup p_g : scene.primitive_groups) {
-      Primitive p = p_g.primitives.get(int(key) - 49);
-      p.toggle();
+      if ((int(key) - 49) < p_g.primitives.size()) { 
+        Primitive p = p_g.primitives.get(int(key) - 49);
+        p.toggle();
+      }
     }
   }
 
