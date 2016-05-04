@@ -51,17 +51,30 @@ class VRListener {
       // Get view matrix from Oculus rift
       PMatrix3D view_matrix = oculus.getMatrix();
 
-      // Kill the terms in the outer columns
+      // Fix the rotation
       view_matrix.preApply(
-      1, 0, 0, 0, 
-      0, 1, 0, 0, 
+      -1, 0, 0, 0, 
+      0, -1, 0, 0, 
       0, 0, 1, 0, 
       0, 0, 0, 0);
 
+      PMatrix3D n = new PMatrix3D();
+
+      // reconstruct a 3x3 for a multiplication on a 3vector
+      n.m00 = view_matrix.m00;
+      n.m01 = view_matrix.m01;
+      n.m02 = view_matrix.m02;
+      n.m10 = view_matrix.m10;
+      n.m11 = view_matrix.m11;
+      n.m12 = view_matrix.m12;
+      n.m20 = view_matrix.m20;
+      n.m21 = view_matrix.m21;
+      n.m22 = view_matrix.m22;
+
       PVector original = new PVector(0, 0, -1);
       PVector result = new PVector();
-      
-      view_matrix.mult(original, result);
+
+      n.mult(original, result);
 
       direction = result;
     } 
